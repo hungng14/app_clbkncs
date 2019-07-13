@@ -1,10 +1,5 @@
 const {
-    getInfoUserSession,
-    getHeaders,
     responseError,
-    sendBodyToAPI,
-    sendQueryToAPI,
-    sendDataToClient,
 } = require('./../../libs/shared');
 
 module.exports = {
