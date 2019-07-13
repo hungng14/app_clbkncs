@@ -1,14 +1,15 @@
 const isEmpty = require('is-empty');
 const passport = require('passport');
+const { TITLE_ADMIN } = require('../../configs/constants');
 
 module.exports = {
     index: async (req, res) => {  // eslint-disable-line
         if (req.isAuthenticated()) {
             return res.redirect('/admin');
         }
-        res.render('login/index', {
+        res.render('admin/login/index', {
             layout: 'login',
-            title: ':: Salefie website | Simplify sale field  ::',
+            title: TITLE_ADMIN,
         });
     },
     login: async (req, res, next) => {

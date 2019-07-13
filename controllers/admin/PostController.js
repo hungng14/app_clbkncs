@@ -1,14 +1,15 @@
 const {
     responseError,
 } = require('./../../libs/shared');
+const { TITLE_ADMIN } = require('../../configs/constants');
 
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
             // const Info = getInfoUserSession(req);
-            res.render('post/index', {
+            res.render('admin/post/index', {
                 layout: 'post',
-                title: ':: Sale fie App | Simplify sale field  ::',
+                title: TITLE_ADMIN,
                 activity: 'Post',
                 // Info,
             });

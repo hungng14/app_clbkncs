@@ -9,7 +9,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const helpers = require('./helpers/helpers');
-// const defaultRouter = require('./routes/users/');
+const usersRouter = require('./routes/users/users');
 const adminRouter = require('./routes/admin/admin');
 
 const app = express();
@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
     // etag: false
 }));
 
-// app.use('/', defaultRouter);
+app.use('/', usersRouter);
 app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
