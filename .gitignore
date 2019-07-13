@@ -61,3 +61,6 @@ typings/
 .next
 
 /.vs
+/obj
+/package-lock.json
+/web.config
