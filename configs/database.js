@@ -1,21 +1,18 @@
-const sql = require('mssql');
+/* eslint-disable no-return-await */
+const sqlDb = require('mssql');
+const { DB_CONFIG } = require('./settings');
 
-const config = {
-    user: 'clbkncsh_admin',
-    password: 'Admin123a@',
-    server: '103.216.113.32', // You can use 'localhost\\instance' to connect to named instance
-    database: 'clbkncsh_Clbkncshvtc',
- 
-    options: {
-        encrypt: true // Use this if you're on Windows Azure
-    }
-}
-
-sql.connect(config, (err) => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log('Database is connected');
-    
-})
+module.exports.executeSql = async (querySql, cb) => {
+    const conn = new sqlDb.ConnectionPool(DB_CONFIG);
+    await conn.connect().then(async () => {
+        console.log('Database is connected!');
+        const req = new sqlDb.Request(conn);
+        await req.query(querySql).then(async (recordset) => {
+            await cb(recordset);
+        }).catch((err) => {
+            cb(null, err);
+        });
+    }).catch((err) => {
+        cb(null, err);
+    });
+};

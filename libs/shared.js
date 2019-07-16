@@ -7,7 +7,7 @@ const empty = require('is-empty');
 const moment = require('moment-timezone');
 const rp = require('request-promise');
 const { URL_API } = require('../configs/constants');
-const { CODES_ERROR } = require('../configs/messages');
+const { CODES_ERROR, CODES_SUCCESS } = require('../configs/messages');
 
 moment()
     .tz('Asia/Ho_Chi_Minh')
@@ -52,6 +52,17 @@ module.exports = {
             Message: CODES_ERROR[StatusCode],
             Errors: errors,
         };
+        return response;
+    },
+    responseSuccess: (statusCode, result = {}) => {
+        const response = {
+            Success: true,
+            StatusCode: statusCode,
+            Message: CODES_SUCCESS[statusCode],
+        };
+        if (!empty(result)) {
+            response.Data = result;
+        }
         return response;
     },
     checkResponseExpire: (req, res, result = {}) => {
