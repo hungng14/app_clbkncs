@@ -173,5 +173,28 @@
             // Anything else...
             return false
         }
+
+        this.show_swal = (callback, message = '', cbError = new Function()) => {
+            swal({
+                    title: 'Cảnh báo?',
+                    text: message,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#27a4b0',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!',
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        callback();
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    cbError();
+                    return swal.noop;
+                });
+        }
+
     }
 })();

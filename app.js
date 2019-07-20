@@ -8,6 +8,7 @@ const hbs = require('express-handlebars');
 const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 const helpers = require('./helpers/helpers');
 const usersRouter = require('./routes/users/users');
 const adminRouter = require('./routes/admin/admin');
@@ -47,7 +48,7 @@ app.use(bodyParser.urlencoded({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
-
+app.use(expressValidator());
 app.use(favicon(path.join(__dirname, 'public', 'logo_club.ico')));
 app.use(logger('dev'));
 app.use(express.json());

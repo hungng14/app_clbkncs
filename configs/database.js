@@ -5,7 +5,6 @@ const { DB_CONFIG } = require('./settings');
 module.exports.executeSql = async (querySql, cb) => {
     const conn = new sqlDb.ConnectionPool(DB_CONFIG);
     await conn.connect().then(async () => {
-        console.log('Database is connected!');
         const req = new sqlDb.Request(conn);
         await req.query(querySql).then(async (recordset) => {
             await cb(recordset);

@@ -7,3 +7,8 @@ exports.STATUS = {
     INACTIVE: 3,
     DELETED: 4,
 };
+
+exports.POSITION_USER = {
+    ADMIN: 'ADMIN',
+    MEMBER: 'MEMBER',
+};

@@ -12,6 +12,7 @@
    <title>{{title}}</title>
 
     {{> css}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 </head>
 
@@ -60,10 +61,14 @@
     {{> modal/confirmLogout/modal}}
 
     {{> js}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/scripts/pages/user.js"></script>
+    
     {{> angular}}
 
     <script src="/app/user/user.controller.js"></script>
     <script src="/app/user/user.service.js"></script>
+    <script src="/app/user/user.validator.js"></script>
     <script src="/app/shared/paginate.service.js"></script>
     <script src="/app/shared/shared.service.js"></script>
     <script src="/app/shared/shared.filter.js"></script>

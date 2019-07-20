@@ -13,7 +13,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item {{#active 'class' activity 'Dashboard'}}{{/active}}">
         <a class="nav-link" href="/admin/dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -48,20 +48,20 @@
       </li> --}}
 
       <!-- Nav Item - Charts -->
-      <li class="nav-item">
+      <li class="nav-item {{#active 'class' activity 'Post'}}{{/active}}">
         <a class="nav-link" href="/admin/post">
           <i class="fas fa-newspaper"></i>
           <span>Bài viết</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      <li class="nav-item {{#active 'class' activity 'User'}}{{/active}}">
         <a class="nav-link" href="/admin/user">
           <i class="fas fa-users"></i>
           <span>Thành viên</span></a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item {{#active 'class' activity 'InfoClb'}}{{/active}}">
         <a class="nav-link" href="/admin/info-clb">
           <i class="fas fa-info-circle"></i>
           <span>Thông tin CLB</span></a>

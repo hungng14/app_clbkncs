@@ -1,0 +1,7 @@
+.form-group.has-error .form-control{
+    border: 1px solid #f31b1b;
+}
+
+.form-group.has-success .form-control{
+    border: 1px solid #00c311 ;
+}

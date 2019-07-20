@@ -9,8 +9,8 @@
          configToastr.$inject=['toastr'];
 
         function configToastr(toastr){
-            toastr.options.timeOut = 4000;
-            toastr.options.positionClass = 'toast-bottom-left';
+            toastr.options.timeOut = 5000;
+            toastr.options.positionClass = 'toast-top-right';
             toastr.options.closeButton = true;
             toastr.options.fadeOut = 250;
             toastr.options.fadeIn = 250;

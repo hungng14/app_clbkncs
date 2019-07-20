@@ -1,3 +1,7 @@
+/* eslint-disable quotes */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable eqeqeq */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 const fs = require('fs');
@@ -35,6 +39,19 @@ module.exports = {
             'x-access-token': Token,
         };
     },
+    isNumberInteger: value => Number.isInteger(value),
+    isNumber: value => (Number(value) == value ? true : false),
+    isMobilePhone: (value) => {
+        const self = module.exports;
+        if (!self.isNumber(value) || !self.isNumberInteger(+value)) { return false; }
+        if (String(value).length < 10 || String(value).length > 11) { return false; }
+        const fistNumber = value.substr(0, 2);
+        const notMobile = /00|10|20|30|40|50|60|70|80|90/i;
+        const checkTwoFirstNumber = !notMobile.test(fistNumber);
+        const regex = /(01|02|03|04|05|06|07|08|09[0|1|2|3|4|5|6|7|8|9])+([0-9]{7,8})/;
+        const checkMobile = regex.test(value);
+        return checkTwoFirstNumber && checkMobile;
+    },
     isEmpty: value => empty(value),
     getDateYMDHMSCurrent: () => moment().format('YYYY-MM-DD HH:mm:ss'),
     getYMDCurrent: () => moment().format('YYYY-MM-DD'),
@@ -50,8 +67,10 @@ module.exports = {
             Success: false,
             StatusCode,
             Message: CODES_ERROR[StatusCode],
-            Errors: errors,
         };
+        if (!empty(errors)) {
+            response.Errors = errors;
+        }
         return response;
     },
     responseSuccess: (statusCode, result = {}) => {
@@ -187,5 +206,24 @@ module.exports = {
             return 'Ngừng';
         }
         return '';
+    },
+    compareValue: (val1, val2) => {
+        if (!val1 && !val2) return true;
+        return val1 && val2 && val1.toString() == val2.toString() ? true : false;
+    },
+    checkCharacterComma: (string = '') => {
+        if (String(string).search('"') > -1) { return true; }
+        if (String(string).search("'") > -1) { return true; }
+        if (String(string).search("`") > -1) { return true; }
+        return false;
+    },
+    checkParamsValid: (params = {}) => {
+        const { checkCharacterComma } = module.exports;
+        for (const prop in params) {
+            if (checkCharacterComma(params[prop])) {
+                return false;
+            }
+        }
+        return true;
     },
 };

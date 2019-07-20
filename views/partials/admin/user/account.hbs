@@ -1,0 +1,51 @@
+<div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="card-title">
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#create_account">Thêm
+                            tài khoản</button>
+                        <button type="button" class="btn btn-primary">Tải lại</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Tài khoản</th>
+                                    <th>Họ tên</th>
+                                    <th>Vị trí</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày thêm</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in accounts">
+                                    <td ng-bind="item.username"></td>
+                                    <td ng-bind="item.name"></td>
+                                    <td ng-bind="item.position"></td>
+                                    <td ng-bind="item.address"></td>
+                                    <td ng-bind="item.phone"></td>
+                                    <td ng-bind="item.created_date | formatDateToDMY"></td>
+                                    <td ng-bind="item.status | filterStatusToText"></td>
+                                    <td>
+                                        <div class="btn-group  btn-group-sm" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn" 
+                                                data-toggle="modal" data-target="#update_account"
+                                                ng-click="getInfoAccount(item.account_id)">
+                                                <i class="fas fa-pen-alt"></i>
+                                            </button>
+                                            <button type="button" class="btn" ng-click="deleteAccount(item.account_id, item.name)">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

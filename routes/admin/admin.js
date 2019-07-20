@@ -21,4 +21,7 @@ require('./PostRoute')(admin);
 /* info clb */
 require('./InfoClbRoute')(admin);
 
+/* info clb */
+require('./RoleRoute')(admin);
+
 module.exports = admin;

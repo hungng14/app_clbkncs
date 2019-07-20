@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" >
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Danh sách bài viết</h1>
@@ -12,6 +12,15 @@
             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
         </div>
         <div class="card-body">
+            <div class="card-title">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_user">Thêm
+                        thành viên</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#create_account">Thêm
+                        tài khoản</button>
+                    <button type="button" class="btn btn-primary">Tải lại</button>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -192,5 +201,4 @@
             </div>
         </div>
     </div>
-
 </div>

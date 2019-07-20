@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="CLBKNCS">
 
 <head>
 
@@ -60,7 +60,13 @@
     {{> modal/confirmLogout/modal}}
 
     {{> js}}
-
+    {{> angular}}
+ <script src="/app/channels/channels.controller.js"></script>
+    <script src="/app/channels/channels.service.js"></script>
+    <script src="/app/channels/channels.validator.js"></script>
+    <script src="/app/shared/paginate.service.js"></script>
+    <script src="/app/shared/shared.service.js"></script>
+    <script src="/app/shared/shared.filter.js"></script>
 </body>
 
 </html>
