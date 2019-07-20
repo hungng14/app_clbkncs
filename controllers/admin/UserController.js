@@ -83,8 +83,15 @@ module.exports = {
             }
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'name, address, avatar, position, phone, birthday, created_date, created_by, status';
-            const values = `N'${params.name || 'NULL'}',N'${params.address || 'NULL'}',N'${params.avatar || 'NULL'}',
-            N'${params.position || 'NULL'}', N'${params.phone || 'NULL'}', N'${params.birthday || 'NULL'}',N'${daycurrent}',${params.created_by || 'NULL'}, 1`;
+            const values = `N'${params.name || 'NULL'}',
+                            N'${params.address || 'NULL'}',
+                            N'${params.avatar || 'NULL'}',
+                            N'${params.position || 'NULL'}', 
+                            N'${params.phone || 'NULL'}', 
+                            N'${params.birthday || 'NULL'}',
+                            N'${daycurrent}',
+                            ${params.created_by || 'NULL'}, 
+                            1`;
             const strSql = insertInto('users', columns, values);
             await executeSql(strSql, (data, err) => {
                 if (err) { return res.json(responseError(4002, err)); }
