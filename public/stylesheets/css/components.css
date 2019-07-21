@@ -5,3 +5,34 @@
 .form-group.has-success .form-control{
     border: 1px solid #00c311 ;
 }
+
+.bd-success{
+    border: 1px solid #00c311 !important;
+}
+
+.bd-error{
+    border: 1px solid #f31b1b !important;;
+}
+
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.flex{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.bd-rd-tr{
+    border-top-right-radius: .35rem !important;
+}
+.bd-rd-br{
+    border-bottom-right-radius: .35rem !important;
+}

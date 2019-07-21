@@ -12,6 +12,7 @@
     <title>{{title}}</title>
 
     {{> css}}
+    {{!-- <link rel="stylesheet" href="/assets/vendor/ckeditor/contents.css"> --}}
 
 </head>
 
@@ -61,12 +62,17 @@
 
     {{> js}}
     {{> angular}}
-    <script src="/app/post/post.controller.js"></script>
+    <script src="/assets/vendor/ckeditor/ckeditor.js"></script>
+    <script src="/assets/vendor/ckeditor/config.js"></script>
+    <script src="/assets/vendor/ckeditor/styles.js"></script>
+    <script src="/app/post/post.edit.controller.js"></script>
     <script src="/app/post/post.service.js"></script>
+    <script src="/app/post/post.validator.js"></script>
     <script src="/app/shared/paginate.service.js"></script>
     <script src="/app/shared/shared.service.js"></script>
     <script src="/app/shared/shared.filter.js"></script>
     <script src="/app/shared/http.service.js"></script>
+    <script src="/assets/scripts/pages/post.js"></script>
 </body>
 
 </html>

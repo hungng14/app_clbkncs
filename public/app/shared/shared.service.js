@@ -196,5 +196,14 @@
                 });
         }
 
+        this.filterObject = (obj = {}) => {
+            const newObj = {};
+            for (const prop in obj) {
+                if (obj[prop] !== 'NULL') {
+                    newObj[prop] = obj[prop];
+                }
+            }
+            return newObj;
+        };
     }
 })();

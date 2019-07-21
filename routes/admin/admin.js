@@ -18,10 +18,13 @@ require('./UserRoute')(admin);
 /* post */
 require('./PostRoute')(admin);
 
+/* category post */
+require('./CategoryPostRoute')(admin);
+
 /* info clb */
 require('./InfoClbRoute')(admin);
 
-/* info clb */
+/* role */
 require('./RoleRoute')(admin);
 
 module.exports = admin;

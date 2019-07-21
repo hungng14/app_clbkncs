@@ -1,9 +1,12 @@
 const isEmpty = require('is-empty');
 const passport = require('passport');
-const { TITLE_ADMIN } = require('../../configs/constants');
+const jwt = require('jsonwebtoken');
+const {
+    TITLE_ADMIN,
+} = require('../../configs/constants');
 
 module.exports = {
-    index: async (req, res) => {  // eslint-disable-line
+    index: async (req, res) => { // eslint-disable-line
         if (req.isAuthenticated()) {
             return res.redirect('/admin');
         }
@@ -16,20 +19,31 @@ module.exports = {
         try {
             passport.authenticate('local', (err, user) => { // eslint-disable-line
                 if (err) {
-                    return res.status(400).json({err});
+                    return res.status(400).json({
+                        err
+                    });
                 }
                 if (!user) {
-                    return res.json({Success: false, Message: 'Tài khoản hoặc mật khẩu không đúng!'});
+                    return res.json({
+                        Success: false,
+                        Message: 'Tài khoản hoặc mật khẩu không đúng!'
+                    });
                 }
                 req.logIn(user, (err) => { // eslint-disable-line
                     if (err) {
                         return next(err);
                     }
-                    return res.json({Success: true, Data: user});
+                    return res.json({
+                        Success: true,
+                        Data: user
+                    });
                 });
             })(req, res, next);
         } catch (err) {
-            res.status(500).json({Success: false, Message: err});
+            res.status(500).json({
+                Success: false,
+                Message: err
+            });
         }
     },
     logout: async (req, res) => { // eslint-disable-line
@@ -46,5 +60,29 @@ module.exports = {
         } else {
             res.json({});
         }
+    },
+    createJSWToken: (req, res) => {
+        const secretKey = 'w1lnWEN63FPKxBNmxHN7WpfW2IoYVYca5moqIUKfWesL1Ykwv34iR5xwfWLy';
+        const environmentId = 'LJRQ1bju55p6a47RwadH';
+        const payload = {
+            iss: environmentId,
+            user: {
+                id: '123',
+                email: 'joe.doe@example.com',
+                name: 'Joe Doe'
+            },
+            services: {
+                'ckeditor-collaboration': {
+                    permissions: {
+                        '*': 'write'
+                    }
+                }
+            }
+        };
+
+        const result = jwt.sign(payload, secretKey, {
+            algorithm: 'HS256',
+        });
+        res.send(result);
     },
 };
