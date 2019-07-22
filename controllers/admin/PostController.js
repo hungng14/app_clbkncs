@@ -8,7 +8,7 @@ const {
     isEmpty,
 } = require('./../../libs/shared');
 const {
-    insertInto, getDataWhere,
+    insertInto, getDataWhere, updateSet,
 } = require('../../libs/sqlStr');
 const { response404 } = require('../../libs/httpResponse');
 const { executeSql } = require('../../configs/database');
@@ -49,15 +49,14 @@ module.exports = {
         try {
             const { id } = req.query;
             const { getInfo } = module.exports;
-            let Info = await getInfo(id);
-            // info = JSON.stringify(info);
-            if (!isEmpty(Info)) {
+            const info = await getInfo(id);
+            const data = JSON.stringify(info);
+            if (!isEmpty(info)) {
                 return res.render('admin/post/edit', {
                     layout: 'edit_post',
                     title: TITLE_ADMIN,
                     activity: 'Post',
-                    id: Info.id,
-                    content: Info.content,
+                    data,
                 });
             }
             return response404(res);
@@ -127,6 +126,41 @@ module.exports = {
             return info;
         } catch (error) {
             return {};
+        }
+    },
+    update: async (req, res) => {
+        try {
+            req.checkBody(updateValidator);
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.json(responseError(1002, errors));
+            }
+            const params = req.body;
+            const paramsCheckValid = {
+                title: params.title,
+                category_post_id: params.category_post_id,
+            };
+            if (!checkParamsValid(paramsCheckValid)) {
+                return res.json(responseError(4004));
+            }
+            const daycurrent = getDateYMDHMSCurrent();
+            const values = `title=N'${params.title || 'NULL'}',
+                            content=N'${params.content || 'NULL'}',
+                            category_post_id=${params.category_post_id || 'NULL'},
+                            published_date=N'${params.published_date || 'NULL'}', 
+                            updated_date=N'${daycurrent}',
+                            updated_by=${params.updated_by || 'NULL'}, 
+                            status=1`;
+            const where = `id = ${params.id}`;
+            const strSql = updateSet('posts', values, where);
+            await executeSql(strSql, async (_data, err) => {
+                if (err) {
+                    return res.json(responseError(4005, err));
+                }
+                return res.json(responseSuccess(2004));
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
         }
     },
 };

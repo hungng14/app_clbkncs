@@ -279,7 +279,7 @@ module.exports = {
             const where = `id = ${params.account_id}`;
             const strSqlAccount = updateSet('account', values, where);
             await executeSql(strSqlAccount, async (data, err) => {
-                if (err) { return res.json(responseError(4002, err)); }
+                if (err) { return res.json(responseError(4005, err)); }
                 const daycurrent = getDateYMDHMSCurrent();
                 const values = `name = N'${params.name || 'NULL'}',
                                 address = N'${params.address || 'NULL'}', 
@@ -291,7 +291,7 @@ module.exports = {
                 const where = `account_id = ${params.account_id}`;
                 const strSql = updateSet('users', values, where);
                 await executeSql(strSql, (data, err) => {
-                    if (err) { return res.json(responseError(4002, err)); }
+                    if (err) { return res.json(responseError(4005, err)); }
                     return res.json(responseSuccess(2004));
                 });
             });

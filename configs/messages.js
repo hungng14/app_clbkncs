@@ -10,6 +10,7 @@ exports.CODES_ERROR = {
     4002: 'Thêm mới lỗi. Vui lòng kiểm tra lại!',
     4003: 'Tài khoản này đã tồn tại',
     4004: 'Không được thêm ký tự đặc biệt, Vui lòng kiểm tra lại',
+    4005: 'Cập nhật lỗi. Vui lòng kiểm tra lại!',
 };
 
 exports.CODES_SUCCESS = {

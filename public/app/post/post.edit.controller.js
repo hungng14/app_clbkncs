@@ -7,15 +7,12 @@
         $scope.validator = ValidatorPost.validationOptions();
        
         $scope.infoPost = {}
-        $scope.dat = (value) => {
-            console.log(value);
-        }
+       
         $scope.getInfo = async () => {
-            // console.log($scope.infoPost);
-            // $scope.infoPost = JSON.parse($scope.infoPost || '{}');
-            // $scope.formUpdatePost = SharedService.filterObject($scope.infoPost);
-            // const content = $scope.formUpdatePost.content || '';
-            // await setDataCKEDITOR(content)
+            $scope.infoPost = $scope.infoPost || {};
+            $scope.formUpdatePost = SharedService.filterObject($scope.infoPost);
+            const content = $scope.formUpdatePost.content || '';
+            await setDataCKEDITOR(content);
         }
 
         async function setDataCKEDITOR(value) {
@@ -32,7 +29,6 @@
                     if (response.Success) {
                         logger.success('Cập nhật thành công');
                         changeCss();
-                        resetFormUpdatePost();
                     } else {
                         logger.error(getResponseMsg(response));
                     }
@@ -43,18 +39,12 @@
             }
         }
 
-        function resetFormUpdatePost() {
-            $scope.formUpdatePost = {};
-            CKEDITOR.instances.content_post.setData('');
-        }
-
         function isEmpty(value) {
             return SharedService.isEmpty(value);
         }
 
         $scope.listCategoryPost = () => {
             PostService.listCategoryPost().then((response) => {
-                console.log(response)
                 if (response.Success) {
                     $scope.categoryPosts = response.Data || [];
                 } else {
@@ -63,6 +53,23 @@
             })
         }
 
+        $scope.formCreateCategory = {};
+        $scope.createCategory = (form) => {
+            if (form.validate()) {
+                PostService.createCategory($scope.formCreateCategory).then((response) => {
+                    if (response.Success) {
+                        logger.success('Thêm thành công');
+                        changeCss();
+                        resetFormCreateCategory();
+                        $scope.listCategoryPost();
+                    } else {
+                        logger.error(getResponseMsg(response));
+                    }
+                })
+            } else {
+                logger.error('Hãy điền đẩy đủ thông tin');
+            }
+        }
         function resetFormCreateCategory() {
             $scope.formCreateCategory = {};
         }

@@ -1,25 +1,25 @@
-<div class="container-fluid" ng-controller="EditPostController" data-ng-init="dat(); getInfo()">
+<div class="container-fluid" ng-controller="EditPostController" data-ng-init="infoPost = {{data}}; getInfo()">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh sách bài viết {{content}}</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh sách bài viết </h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="card-title ">
                 <div class="flex flex-end">
-                    <button type="button" class="btn btn-success mr-1" ng-click="create(f_CreatePost)">
+                    <button type="button" class="btn btn-success mr-1" ng-click="update(f_UpdatePost)">
                         Lưu
                     </button>
                     <a href="/admin/post" class="btn btn-primary">Danh sách</a>
                 </div>
             </div>
-            <form name="f_CreatePost" ng-validate="validator">
+            <form name="f_UpdatePost" ng-validate="validator">
                 <div class="form-group">
                     <label>Tên danh mục bài viết <span class="required">(*)</span> </label>
                     <div>
                         <div class="input-group mb-2">
-                            <select name="category_post" ng-model="formCreatePost.category_post_id" 
+                            <select name="category_post" ng-model="formUpdatePost.category_post_id" 
                                 ng-options="category.id as category.category_name for category in categoryPosts"
                                 name="category_post" placeholder="Danh mục" class="form-control">
                                 <option value="" ng-if="hideOptions"></option>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label>Tiêu đề <span class="required">(*)</span> </label>
-                    <textarea name="title" ng-model="formCreatePost.title" id="title" rows="2" placeholder="..." class="form-control"></textarea>
+                    <textarea name="title" ng-model="formUpdatePost.title" id="title" rows="2" placeholder="..." class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Nội dung <span class="required">(*)</span> </label>

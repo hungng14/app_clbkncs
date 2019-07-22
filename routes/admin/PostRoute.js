@@ -6,4 +6,5 @@ module.exports = (route) => {
     route.route('/post/add').get(PostController.add);
     route.route('/post/edit').get(PostController.edit);
     route.route('/post/create').post(PostController.create);
+    route.route('/post/update').post(PostController.update);
 };
