@@ -37,6 +37,7 @@ module.exports = {
                             Không tìm thấy trang bạn yêu cầu
                         </title>
                         <link rel="stylesheet" href="/stylesheets/css/error.css">
+                        <link href="/stylesheets/css/sb-admin-2.min.css" rel="stylesheet">
                     </head>
                     <body>
                         

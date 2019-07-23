@@ -12,7 +12,7 @@ const expressValidator = require('express-validator');
 const helpers = require('./helpers/helpers');
 const usersRouter = require('./routes/users/users');
 const adminRouter = require('./routes/admin/admin');
-
+const { response404} = require('./libs/httpResponse');
 const app = express();
 
 require('./configs/database');
@@ -75,7 +75,9 @@ app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.title = 'Page not found';
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+    if (err.status === 404) {
+        return response404(res);
+    }
     // render the error page
     res.status(err.status || 500);
     res.render('error');
