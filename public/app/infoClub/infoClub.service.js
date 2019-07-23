@@ -5,8 +5,8 @@
     InfoClubService.$inject = ['HttpService'];
 
     function InfoClubService( HttpService) {
-        this.list = (data) => {
-            return HttpService.sendData('GET', '/admin/infoClub/list', data, 'Lỗi xảy khi hiển thị danh sách thành viên');
+        this.info = (data) => {
+            return HttpService.sendData('GET', '/admin/info-clb/getInfo', data, 'Lỗi xảy khi hiển thị thông tin câu lạc bộ');
         };
     }
 })();

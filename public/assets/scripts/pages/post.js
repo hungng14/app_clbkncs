@@ -13,9 +13,18 @@ var Page = function () {
         CKEDITOR.replace('content_post', config);
     }
 
+    function initBootstrapDatePicker() {
+        $('.date-picker').datepicker({
+            orientation: "left",
+            weekStart: 1,
+            autoclose: true
+        });
+    }
+
     return {
         init: function () {  
             initCKEDITOR();
+            // initBootstrapDatePicker();
         }
     };
 

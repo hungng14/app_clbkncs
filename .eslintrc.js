@@ -18,5 +18,6 @@ module.exports = {
         'arrow-parens': 2,
         'semi': 2,
         'no-underscore-dangle': 'off',
+        'consistent-return': 'off'
     }
 };
