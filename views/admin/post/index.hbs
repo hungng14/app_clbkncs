@@ -17,7 +17,6 @@
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>Nội dung</th>
                             <th>Danh mục</th>
                             <th>Ngày tạo</th>
                             <th>Trạng thái</th>
@@ -27,8 +26,7 @@
                     <tbody>
                         <tr ng-repeat="item in posts">
                             <td ng-bind="item.title"></td>
-                            <td ng-bind="item.content"></td>
-                            <td ng-bind="item.category_post_id"></td>
+                            <td ng-bind="item.category_name"></td>
                             <td ng-bind="item.created_date | formatDateToDMY"></td>
                             <td ng-bind="item.status | filterStatusToText"></td>
                             <td>

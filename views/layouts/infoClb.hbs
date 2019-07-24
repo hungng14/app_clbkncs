@@ -12,8 +12,8 @@
     <title>{{title}}</title>
 
     {{> css}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
+    {{!-- <link rel="stylesheet" href="/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body id="page-top">
@@ -61,10 +61,11 @@
     {{> modal/confirmLogout/modal}}
 
     {{> js}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="/assets/scripts/pages/infoClub.js"></script>
-    
     {{> angular}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    {{!-- <script src="/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script> --}}
+    <script src="/assets/scripts/pages/infoClub.js"></script>
+   
     <script src="/app/infoClub/infoClub.controller.js"></script>
     <script src="/app/infoClub/infoClub.validator.js"></script>
     <script src="/app/infoClub/infoClub.service.js"></script>

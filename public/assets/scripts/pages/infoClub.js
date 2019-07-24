@@ -2,10 +2,15 @@
 var Page = function () {
     
     function initBootstrapDatePicker() {
-        $('.date-picker').datepicker({
-            orientation: "left",
-            weekStart: 1,
-            autoclose: true
+        // $('.timepicker-24').timepicker({
+		// 	autoclose: true,
+		// 	minuteStep: 1,
+		// 	showSeconds: false,
+		// 	showMeridian: false
+        // });
+        
+        $('.datetime-piclker').datetimepicker({
+            format: 'HH:mm',
         });
     }
 

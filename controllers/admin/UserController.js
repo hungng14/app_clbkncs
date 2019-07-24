@@ -42,7 +42,7 @@ module.exports = {
     list: async (req, res) => {
         try {
             const select = 'id, name, address, avatar, position, created_date, phone, status';
-            const where = 'account_id IS NULL AND status != 4';
+            const where = 'account_id IS NULL AND status != 4 ORDER BY users.created_date  DESC';
             const sql = getDataWhere('users', select, where);
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err)); }
@@ -233,7 +233,7 @@ module.exports = {
             const select = `users.name, users.address, users.avatar, users.status, users.phone, 
             users.position, users.account_id, users.created_date, account.username`;
             const join = 'account ON  users.account_id = account.id';
-            const where = 'users.status != 4';
+            const where = 'users.status != 4  ORDER BY users.created_date  DESC';
             const sql = getDataJoinWhere('users', select, 'INNER', join, where);
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err)); }

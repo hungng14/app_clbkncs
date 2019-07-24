@@ -8,7 +8,7 @@ const {
     isEmpty,
 } = require('./../../libs/shared');
 const {
-    insertInto, getDataWhere, updateSet,
+    insertInto, getDataWhere, updateSet, getDataJoinWhere
 } = require('../../libs/sqlStr');
 const { response404 } = require('../../libs/httpResponse');
 const { executeSql } = require('../../configs/database');
@@ -66,9 +66,11 @@ module.exports = {
     },
     list: async (req, res) => {
         try {
-            const select = 'id, title, content, category_post_id, created_date, status';
-            const where = 'status != 4';
-            const sql = getDataWhere('posts', select, where);
+            const select = `posts.id, posts.title, posts.category_post_id, posts.created_date, 
+            posts.status, category_posts.category_name`;
+            const where = 'posts.status != 4 ORDER BY posts.created_date  DESC';
+            const join = 'category_posts ON  posts.category_post_id = category_posts.id';
+            const sql = getDataJoinWhere('posts', select, 'INNER', join, where);
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err));}
                 return res.json(responseSuccess(2001, data.recordset));
