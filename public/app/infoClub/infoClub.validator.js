@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    $.validator.addMethod("isMobile", function (value) {
+    $.validator.addMethod('isMobile', function (value) {
         if(!value) {  return true };
         if(value.toString().length < 10 || value.toString().length > 11) {return false};
         var fistNumber = value.substr(0, 2);
@@ -10,7 +10,11 @@
         var checkMobile = regex.test(value);
         return checkTwoFirstNumber && checkMobile;
     });
-   
+    $.validator.addMethod('isEmail', function (value) {
+        if(!value) { return true };
+        let filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return filter.test(value) ? true : false;
+    });
     function removeClassByProp(prop, value){
         let element = $(`input[${prop}$="${value}"]`);
         if(element.val() != undefined && !element.val().length){
@@ -26,21 +30,23 @@
                     errorElement: 'span', //default input error message container
                     errorClass: 'error-block', // default input error message class
                     rules: {
-                        // member: {
-                        //     required: true,
-                        //     minlength: 6
-                        // },
-                        // address: {
-                        //     required: true,
-                        // },
-                        // phone: {
-                        //     required: true,
-                        //     number: true,
-                        //     isMobile: true
-                        // },
-                        // slogan: {
-                        //     required: true,
-                        // },
+                        member: {
+                            required: true,
+                        },
+                        address: {
+                            required: true,
+                        },
+                        phone: {
+                            required: true,
+                            isMobile: true
+                        },
+                        slogan: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                            isEmail: true,
+                        },
                     },
                     errorPlacement: function (error, element) { // render error placement for each input type
                         return false;

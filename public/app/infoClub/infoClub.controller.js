@@ -5,7 +5,7 @@
         InfoClubController.$inject = ['$scope', 'InfoClubService', 'ValidatorInfoClub', 'PaginationFactory', 'logger', 'limitData', 'SharedService', 'UploadService'];
 
     function InfoClubController($scope, InfoClubService, ValidatorInfoClub, PaginationFactory, logger, limitData, SharedService, UploadService) {
-        $scope.formvalidator = ValidatorInfoClub.validationOptions();
+        $scope.validator = ValidatorInfoClub.validationOptions();
         
         const { isEmpty, filterObject, changeCss } = SharedService;
         $scope.info = () => {
@@ -41,7 +41,7 @@
             const work_end_time = $("#end_time").find('input').val();
             $scope.formInfoClub.work_start_time = work_start_time;
             $scope.formInfoClub.work_end_time = work_end_time;
-            if (form) {
+            if (form.validate()) {
                 UploadService.uploadFiles(
                     'POST',
                     '/admin/info-clb/update',
