@@ -1,6 +1,5 @@
 (function () {
     "use strict";
-   
     function removeClassByProp(prop, value){
         let element = $(`input[${prop}$="${value}"]`);
         if(element.val() != undefined && !element.val().length){
@@ -8,7 +7,7 @@
         }
     }
     angular.module('CLBKNCS')
-        .factory('ValidatorPost', function () {
+        .factory('ValidatorDepartment', function () {
             // factory returns an object
             let factoryObj = {};
             factoryObj.validationOptions = function () {
@@ -16,10 +15,7 @@
                     errorElement: 'span', //default input error message container
                     errorClass: 'error-block', // default input error message class
                     rules: {
-                        category_name: {
-                            required: true,
-                        },
-                        category_post: {
+                        name: {
                             required: true,
                         },
                         title: {
