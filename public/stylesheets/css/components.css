@@ -36,3 +36,24 @@
 .bd-rd-br{
     border-bottom-right-radius: .35rem !important;
 }
+
+.image-wrapper-input{
+    height: 100px;
+    width: 100px
+}
+
+.image-wrapper-input img{
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper-file-input input.custom-file-input{
+    width: 96px;
+    line-height: 1.5;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+.wrapper-file-input.flex .btn-choose-file{
+    height: 37px;
+}

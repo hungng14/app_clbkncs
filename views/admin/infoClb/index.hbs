@@ -7,29 +7,25 @@
         <div class="card-body">
             <div class="card-title ">
                 <div class="flex flex-end">
-                    <button type="button" class="btn btn-success mr-1" ng-click="update(f_UpdatePost)">
+                    <button type="button" class="btn btn-success mr-1" ng-click="update(f_InfoClub)">
                         Lưu
                     </button>
                 </div>
             </div>
-            <form name="f_InfoClub" ng-validate="validator">
+            <form name="f_InfoClub" >
                 <div class="form-group">
                     <label>Khẩu hiệu <span class="required">(*)</span> </label>
-                    <textarea name="title" ng-model="formInfoClub.slogan" id="slogan" rows="2" placeholder="..."
+                    <textarea name="title" ng-model="formInfoClub.slogan" name="slogan" id="slogan" rows="2" placeholder="..."
                         class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Người đứng đầu <span class="required">(*)</span> </label>
                     <div class="input-group mb-2">
-                        <select name="user" ng-model="formInfoClub.user_id"
-                            ng-options="category.id as category.category_name for category in users" 
+                        <select ng-model="formInfoClub.user_id"
+                            ng-options="member.id as member.name for member in members" 
                              placeholder="Người đứng đầu" class="form-control">
                             <option value="" ng-if="hideOptions"></option>
                         </select>
-                        <div class="input-group-prepend">
-                            <button type="button" data-target="#create_category" data-toggle="modal"
-                                class="btn btn-success bd-rd-tr bd-rd-br">Thêm mới</button>
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label>Email <span class="required">(*)</span> </label>
-                    <input type="email" ng-model="formInfoClub.email" name="email" id="" class="form-control">
+                    <input type="text" ng-model="formInfoClub.email" name="email" id="" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Số điện thoại <span class="required">(*)</span></label>
@@ -50,7 +46,7 @@
                         <div class="col-md-6 row">
                             <label class="col-md-2">Bắt đầu </label>
                             <div class="col-md-8">
-                                <div class="input-group date datetime-piclker" >
+                                <div class="input-group date datetime-piclker" id="start_time">
                                     <input type="text" class="form-control dashed-border "
                                         ng-model="formInfoClub.work_start_time" placeholder="Giờ bắt đầu"
                                         name="work_start_time">
@@ -62,7 +58,7 @@
                         <div class="col-md-6 row">
                             <label class="col-md-2">Kết thúc </label>
                             <div class="col-md-8">
-                                <div class="input-group date datetime-piclker" >
+                                <div class="input-group date datetime-piclker" id="end_time">
                                     <input type="text" class="form-control dashed-border "
                                         ng-model="formInfoClub.work_end_time" placeholder="Giờ kết thúc"
                                         name="work_end_time">
@@ -75,28 +71,31 @@
                 </div>
                 <div class="form-group">
                     <label> Phạm vi hoạt động </label>
-                    <textarea name="title" ng-model="formInfoClub.scales"  id="scales" rows="2" placeholder="..."
+                    <textarea name="scales" ng-model="formInfoClub.scales"  id="scales" rows="2" placeholder="..."
                         class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <label> Ảnh đại diện <span class="required">(*)</span> </label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="avatar" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                    <label> Ảnh đại diện </label>
+                    <div class="wrapper-file-input flex">
+                        <input type="file" file-upload-model="avatar" class="custom-file-input" id="avatar" required>
+                        <button class="btn btn-success btn-choose-file mr-5">Chọn ảnh</button>
+                        <div class="image-wrapper-input avatar-profile">
+                            <img src="/images/avatar.jpg" alt="" srcset="">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label> Logo <span class="required">(*)</span> </label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="logo" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                    <div class="wrapper-file-input flex">
+                        <input type="file" file-upload-model="logo" class="custom-file-input" id="logo" required>
+                        <button class="btn btn-success btn-choose-file mr-5">Chọn ảnh</button>
+                        <div class="image-wrapper-input logo-profile">
+                            <img src="/images/logo.jpg" alt="" srcset="">
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-    {{> admin/user/modal}}
-    <!-- modal -->
 
 </div>

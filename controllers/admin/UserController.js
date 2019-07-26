@@ -15,7 +15,7 @@ const {
 const {
     insertInto, getDataWhere, getDataJoin, updateSet, getDataJoinWhere, removeRecord,
 } = require('../../libs/sqlStr');
-const { TITLE_ADMIN } = require('../../configs/constants');
+const { TITLE_ADMIN, TYPE_USER } = require('../../configs/constants');
 
 const UserService = require('../../services/UserService');
 const { executeSql } = require('../../configs/database');
@@ -42,7 +42,20 @@ module.exports = {
     list: async (req, res) => {
         try {
             const select = 'id, name, address, avatar, position, created_date, phone, status';
-            const where = 'account_id IS NULL AND status != 4 ORDER BY users.created_date  DESC';
+            const where = `type = N'${TYPE_USER.MEMBER}' AND status != 4 ORDER BY users.created_date  DESC`;
+            const sql = getDataWhere('users', select, where);
+            await executeSql(sql, (data, err) => {
+                if (err) { return res.json(responseError(4000, err)); }
+                return res.json(responseSuccess(2001, data.recordset));
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
+        }
+    },
+    listMemberActive: async (req, res) => {
+        try {
+            const select = 'id, name';
+            const where = `type = N'${TYPE_USER.MEMBER}' AND status = 1 ORDER BY users.created_date  DESC`;
             const sql = getDataWhere('users', select, where);
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err)); }
@@ -82,13 +95,14 @@ module.exports = {
                 return res.json(responseError(4004));
             }
             const daycurrent = getDateYMDHMSCurrent();
-            const columns = 'name, address, avatar, position, phone, birthday, created_date, created_by, status';
+            const columns = 'name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
             const values = `N'${params.name || 'NULL'}',
                             N'${params.address || 'NULL'}',
                             N'${params.avatar || 'NULL'}',
                             N'${params.position || 'NULL'}', 
                             N'${params.phone || 'NULL'}', 
                             N'${params.birthday || 'NULL'}',
+                            N'${TYPE_USER.MEMBER}',
                             N'${daycurrent}',
                             ${params.created_by || 'NULL'}, 
                             1`;
@@ -202,7 +216,7 @@ module.exports = {
                 await executeSql(getDataWhere('account', 'id', `username= N'${params.username}'`), async (_data) => {
                     const account = !isEmpty(_data) ? (_data.recordset[0] || {}) : '';
                     const account_id = account.id;
-                    const columns = 'account_id, name, address, avatar, position, phone, birthday, created_date, created_by, status';
+                    const columns = 'account_id, name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
                     const values = `${account_id || 'NULL'}, 
                                     N'${params.name || 'NULL'}',
                                     N'${params.address || 'NULL'}',
@@ -210,6 +224,7 @@ module.exports = {
                                     N'${params.position || 'NULL'}', 
                                     N'${params.phone || 'NULL'}', 
                                     N'${params.birthday || 'NULL'}',
+                                    N'${TYPE_USER.ACCOUNT}',
                                     N'${daycurrent}',
                                     ${params.created_by || 'NULL'}, 
                                     1`;
@@ -233,7 +248,7 @@ module.exports = {
             const select = `users.name, users.address, users.avatar, users.status, users.phone, 
             users.position, users.account_id, users.created_date, account.username`;
             const join = 'account ON  users.account_id = account.id';
-            const where = 'users.status != 4  ORDER BY users.created_date  DESC';
+            const where = `type = N'${TYPE_USER.ACCOUNT}' AND users.status != 4  ORDER BY users.created_date  DESC`;
             const sql = getDataJoinWhere('users', select, 'INNER', join, where);
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err)); }

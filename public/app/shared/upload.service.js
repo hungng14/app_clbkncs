@@ -41,7 +41,6 @@
                     return handlingError('error ', error);
                 })
         };
-
         this.uploadImage = (method, url, data, img, fieldName) => {
             try {
                 let fd = new FormData();
@@ -73,14 +72,11 @@
                 handlingError('Error occurred when upload image. File is not image', err);
             }
         };
-        this.uploadFile = (method, url, file, obj) => {
+        this.uploadFile = (method, url, file, obj={}) => {
             try {
                 let fd = new FormData();
-                if(obj && Object.keys(obj).length){
-                    let keysObj = Object.keys(obj);
-                    keysObj.map(key =>{
-                        fd.append(key, obj[key])
-                    });
+                for(const prop in obj){
+                    fd.append(prop, obj[prop]);
                 }
                 if (file) {
                     fd.append('File', file);
@@ -105,7 +101,36 @@
                 handlingError('Error occurred when upload file', err);
             }
         };
-
+        this.uploadFiles = (method, url, files={}, obj={}) => {
+            try {
+                let fd = new FormData();
+                for(const prop in obj){
+                    fd.append(prop, obj[prop]);
+                }
+                for(const prop in files){
+                    fd.append(prop, files[prop]);
+                }
+                
+                return $http({
+                        method: method,
+                        url: url,
+                        data: fd,
+                        withCredentials: true,
+                        transformRequest: angular.identity,
+                        headers: {
+                            'Content-Type': undefined,
+                        }
+                    })
+                    .then((response) => {
+                        return response.data;
+                    })
+                    .catch(err => {
+                        handlingError('Error occurred when upload file', err)
+                    });
+            } catch (err) {
+                handlingError('Error occurred when upload file', err);
+            }
+        };
         this.downloadfile = (method, url, data) => {
             try {
                 return $http({
@@ -164,7 +189,6 @@
             }
 
         };
-
         this.upload = (img) => {
             let imageBase64 = img[0].split(',')[1];
             let blob = base64toBlob(imageBase64, 'image/png');
@@ -183,7 +207,6 @@
                 .catch(err => handlingError('Error occurred when upload image', err));
 
         };
-
         this.deleteFile = (data) => {
             return $http.post('/admin/deleteFile', data)
             .then((response) => {
@@ -191,8 +214,6 @@
             })
             .catch(err => handlingError('Lỗi xảy ra khi xóa file ', err));
         };
-
-
         function base64toBlob(base64Data, contentType) {
             contentType = contentType || 'image/png';
             let sliceSize = 1024;

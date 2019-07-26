@@ -12,3 +12,8 @@ exports.POSITION_USER = {
     ADMIN: 'ADMIN',
     MEMBER: 'MEMBER',
 };
+
+exports.TYPE_USER = {
+    ACCOUNT: 'ACCOUNT',
+    MEMBER: 'MEMBER',
+};

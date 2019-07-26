@@ -199,7 +199,7 @@
         this.filterObject = (obj = {}) => {
             const newObj = {};
             for (const prop in obj) {
-                if (obj[prop] !== 'NULL') {
+                if (String(obj[prop]).toLowerCase() != 'null') {
                     newObj[prop] = obj[prop];
                 }
             }

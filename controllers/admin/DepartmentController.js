@@ -22,44 +22,12 @@ module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
             // const Info = getInfoUserSession(req);
-            res.render('admin/post/index', {
-                layout: 'post',
+            res.render('admin/department/index', {
+                layout: 'department',
                 title: TITLE_ADMIN,
-                activity: 'Post',
+                activity: 'Department',
                 // Info,
             });
-        } catch (err) {
-            res.status(500).json(responseError(1001, err));
-        }
-    },
-    add: async (req, res) => { // eslint-disable-line
-        try {
-            // const Info = getInfoUserSession(req);
-            res.render('admin/post/add', {
-                layout: 'add_post',
-                title: TITLE_ADMIN,
-                activity: 'Post',
-                // Info,
-            });
-        } catch (err) {
-            res.status(500).json(responseError(1001, err));
-        }
-    },
-    edit: async (req, res) => { // eslint-disable-line
-        try {
-            const { id } = req.query;
-            const { getInfo } = module.exports;
-            const info = await getInfo(id);
-            const data = JSON.stringify(info);
-            if (!isEmpty(info)) {
-                return res.render('admin/post/edit', {
-                    layout: 'edit_post',
-                    title: TITLE_ADMIN,
-                    activity: 'Post',
-                    data,
-                });
-            }
-            return response404(res);
         } catch (err) {
             res.status(500).json(responseError(1001, err));
         }

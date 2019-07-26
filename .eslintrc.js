@@ -18,6 +18,8 @@ module.exports = {
         'arrow-parens': 2,
         'semi': 2,
         'no-underscore-dangle': 'off',
-        'consistent-return': 'off'
+        'consistent-return': 'off',
+        'no-restricted-syntax': 'off',
+        'array-callback-return': 'off'
     }
 };

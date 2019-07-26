@@ -27,4 +27,7 @@ require('./InfoClbRoute')(admin);
 /* role */
 require('./RoleRoute')(admin);
 
+/* department */
+require('./DepartmentRoute')(admin);
+
 module.exports = admin;

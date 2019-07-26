@@ -3,6 +3,7 @@ const UserController = require('./../../controllers/admin/UserController');
 module.exports = (route) => {
     route.route('/user').get(UserController.index);
     route.route('/user/list').get(UserController.list);
+    route.route('/user/listMemberActive').get(UserController.listMemberActive);
     route.route('/user/getInfo').get(UserController.getInfo);
     route.route('/user/create').post(UserController.create);
     route.route('/user/update').post(UserController.update);

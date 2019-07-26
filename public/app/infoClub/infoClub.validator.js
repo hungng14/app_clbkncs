@@ -26,34 +26,21 @@
                     errorElement: 'span', //default input error message container
                     errorClass: 'error-block', // default input error message class
                     rules: {
-                        name: {
-                            required: true,
-                            minlength: 6
-                        },
-                        address: {
-                            required: true,
-                        },
-                        phone: {
-                            required: true,
-                            number: true,
-                            isMobile: true
-                        },
-                        // account
-                        username: {
-                            required: true,
-                            minlength: 5,
-                        },
-                        password: {
-                            required: true,
-                            minlength: 5,
-                        },
-                        repassword: {
-                            required: true,
-                            equalTo: '#password'
-                        },
-                        role: {
-                            required: true
-                        },
+                        // member: {
+                        //     required: true,
+                        //     minlength: 6
+                        // },
+                        // address: {
+                        //     required: true,
+                        // },
+                        // phone: {
+                        //     required: true,
+                        //     number: true,
+                        //     isMobile: true
+                        // },
+                        // slogan: {
+                        //     required: true,
+                        // },
                     },
                     errorPlacement: function (error, element) { // render error placement for each input type
                         return false;
