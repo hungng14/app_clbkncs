@@ -5,6 +5,10 @@ const {
     TITLE_ADMIN,
 } = require('../../configs/constants');
 
+const {
+    responseError, responseSuccess,
+} = require('../../libs/shared');
+
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         if (req.isAuthenticated()) {
@@ -19,31 +23,20 @@ module.exports = {
         try {
             passport.authenticate('local', (err, user) => { // eslint-disable-line
                 if (err) {
-                    return res.status(400).json({
-                        err
-                    });
+                    return res.status(400).json(responseError(1001, err));
                 }
                 if (!user) {
-                    return res.json({
-                        Success: false,
-                        Message: 'Tài khoản hoặc mật khẩu không đúng!'
-                    });
+                    return res.json(responseError(1050));
                 }
                 req.logIn(user, (err) => { // eslint-disable-line
                     if (err) {
                         return next(err);
                     }
-                    return res.json({
-                        Success: true,
-                        Data: user
-                    });
+                    return res.json(responseSuccess(2050, user));
                 });
             })(req, res, next);
-        } catch (err) {
-            res.status(500).json({
-                Success: false,
-                Message: err
-            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
         }
     },
     logout: async (req, res) => { // eslint-disable-line

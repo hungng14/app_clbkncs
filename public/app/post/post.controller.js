@@ -14,6 +14,23 @@
                 }
             })
         }
+
+        $scope.deletePost = (id) => {
+            function deletePost() {
+                PostService.delete({
+                    id,
+                }).then((response) => {
+                    if (response.Success) {
+                        swal('Đã xóa!', 'success');
+                        $scope.list();
+                    } else {
+                        swal('Có lỗi xảy ra', 'Vui lòng thử lại.', 'error');
+                    }
+                });
+            }
+            const msg = `Bạn có chắc chắn muốn xóa bài viết này?`;
+            SharedService.show_swal(deletePost, msg);
+        };
     
         $scope.info = (id) => {
             window.location.href = `/admin/post/edit?id=${id}`;

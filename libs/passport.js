@@ -1,7 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const rp = require('request-promise');
-const constants = require('../configs/constants');
+const {URL} = require('../configs/constants');
 
 passport.serializeUser((user, done) => {
     user.Data.Token = user.Token; // eslint-disable-line
@@ -13,20 +13,18 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(new LocalStrategy({
-    usernameField: 'LoginID',
-    passwordField: 'Password',
+    usernameField: 'username',
+    passwordField: 'password',
     passReqToCallback: true,
-}, ((req, LoginID, Password, done) => { // eslint-disable-line
+}, ((req, username, password, done) => { // eslint-disable-line
         try {
-            const url = `${constants.URL_API}signIn`;
+            const url = `${URL}login`;
             const options = {
                 method: 'POST',
                 uri: url,
                 body: {
-                    UserName: LoginID,
-                    Password,
-                    Authorization: constants.AUTHORIZATION,
-                    AccessType: constants.ACESS_TYPE,
+                    username,
+                    password,
                 },
                 json: true, // Automatically stringifies the body to JSON
             };

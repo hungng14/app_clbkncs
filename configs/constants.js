@@ -17,3 +17,5 @@ exports.TYPE_USER = {
     ACCOUNT: 'ACCOUNT',
     MEMBER: 'MEMBER',
 };
+
+exports.URL = 'http://localhost:9614/';

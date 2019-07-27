@@ -2,4 +2,5 @@ const DashboardsController = require('./../../controllers/admin/DashboardControl
 
 module.exports = (route) => {
     route.route('/dashboard').get(DashboardsController.index);
+    route.route('/').get(DashboardsController.index);
 };

@@ -26,6 +26,10 @@
             return HttpService.sendData('POST', '/admin/post/update', data, 'Lỗi xảy khi cập nhật bài viết');
         };
 
+        this.delete = (data) => {
+            return HttpService.sendData('POST', '/admin/post/delete', data, 'Lỗi xảy khi xóa bài viết');
+        };
+
     }
 })();
 

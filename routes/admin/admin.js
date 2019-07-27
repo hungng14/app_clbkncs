@@ -3,8 +3,6 @@ const express = require('express');
 const admin = express.Router();
 // const auth = require('../../libs/passport');
 
-require('./default')(admin);
-
 /* auth */
 // admin.use((req, res, next) => {
 //     auth.isAuthenticated(req, res, next);

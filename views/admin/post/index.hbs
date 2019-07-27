@@ -30,11 +30,11 @@
                             <td ng-bind="item.created_date | formatDateToDMY"></td>
                             <td ng-bind="item.status | filterStatusToText"></td>
                             <td>
-                                <div class="btn-group  btn-group-sm" role="group" aria-label="Basic example">
+                                <div class="btn-group  btn-group-sm" role="group">
                                     <button type="button" class="btn" ng-click="info(item.id)" >
                                         <i class="fas fa-pen-alt"></i>
                                     </button>
-                                    <button type="button" class="btn" ng-click="deleteUser(item.id, item.name)">
+                                    <button type="button" class="btn" ng-click="deletePost(item.id)">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>

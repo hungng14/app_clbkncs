@@ -17,6 +17,10 @@
         this.update = (data) => {
             return HttpService.sendData('POST', '/admin/department/update', data, 'Lỗi xảy khi cập nhật ban ngànht');
         };
+
+        this.deleteDepartment = (data) => {
+            return HttpService.sendData('POST', '/admin/department/delete', data, 'Lỗi xảy khi xóa ban ngành');
+        };
     }
 })();
 

@@ -12,7 +12,9 @@ const expressValidator = require('express-validator');
 const helpers = require('./helpers/helpers');
 const usersRouter = require('./routes/users/users');
 const adminRouter = require('./routes/admin/admin');
-const { response404} = require('./libs/httpResponse');
+const defaultRouter = require('./routes/default/default');
+const { response404 } = require('./libs/httpResponse');
+
 const app = express();
 
 require('./configs/database');
@@ -62,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }));
 
 app.use('/', usersRouter);
+app.use('/', defaultRouter);
 app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler

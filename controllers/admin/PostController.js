@@ -15,7 +15,7 @@ const { executeSql } = require('../../configs/database');
 const { TITLE_ADMIN } = require('../../configs/constants');
 
 const {
-    createValidator, updateValidator,
+    createValidator, updateValidator, idValidator,
 } = require('../../validator/PostValidator');
 
 module.exports = {
@@ -160,6 +160,26 @@ module.exports = {
                     return res.json(responseError(4005, err));
                 }
                 return res.json(responseSuccess(2004));
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
+        }
+    },
+    delete: async (req, res) => {
+        try {
+            req.checkBody(idValidator);
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.json(responseError(1002, errors));
+            }
+            const params = req.body;
+            const daycurrent = getDateYMDHMSCurrent();
+            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+            const where = `id = ${params.id}`;
+            const strSql = updateSet('posts', values, where);
+            await executeSql(strSql, (data, err) => {
+                if (err) { return res.json(responseError(4002, err)); }
+                return res.json(responseSuccess(2005));
             });
         } catch (error) {
             return res.json(responseError(1003, error));
