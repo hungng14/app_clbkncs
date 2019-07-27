@@ -13,11 +13,15 @@
                 $scope.formInfoClub = response.Success ? (response.Data || {}) : {};
                 $scope.formInfoClub = filterObject($scope.formInfoClub);
                 if (!isEmpty($scope.formInfoClub.logo)) {
+                    $scope.formInfoClub.logoOld = $scope.formInfoClub.logo;
                     let urlLogo = $scope.formInfoClub.logo;
+                    delete $scope.formInfoClub.logo;
                     angular.element('.logo-profile').find('img').attr('src', (urlLogo || '/images/logo.jpg'))
                 }
                 if (!isEmpty($scope.formInfoClub.avatar)) {
-                    let urlAvatar = $scope.formInfoClub.avatar;
+                    $scope.formInfoClub.avatarOld = $scope.formInfoClub.avatar;
+                    let urlAvatar = $scope.formInfoClub.avatarOld;
+                    delete $scope.formInfoClub.avatar;
                     angular.element('.avatar-profile').find('img').attr('src', (urlAvatar || '/images/avatar.jpg'))
                 }
             })

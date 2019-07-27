@@ -57,3 +57,7 @@
 .wrapper-file-input.flex .btn-choose-file{
     height: 37px;
 }
+
+.page-content{
+    display: none;
+}

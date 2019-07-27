@@ -236,4 +236,5 @@ module.exports = {
         }
         return true;
     },
+    joinPath: filePath => path.join(__dirname, filePath),
 };

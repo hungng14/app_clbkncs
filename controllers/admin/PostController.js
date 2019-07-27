@@ -6,7 +6,16 @@ const {
     getDateYMDHMSCurrent,
     checkParamsValid,
     isEmpty,
+    uploadFiles, storage,
+    fileFilterImage,
+    sliceString,
+    beforeUpload,
+    deleteFile,
+    joinPath,
 } = require('./../../libs/shared');
+
+const uploadImage = uploadFiles(storage('posts', 'images'), fileFilterImage, 'File');
+
 const {
     insertInto, getDataWhere, updateSet, getDataJoinWhere,
 } = require('../../libs/sqlStr');
@@ -81,42 +90,74 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            req.checkBody(createValidator);
-            const errors = req.validationErrors();
-            if (errors) {
-                return res.json(responseError(1002, errors));
-            }
-            const params = req.body;
-            const paramsCheckValid = {
-                title: params.title,
-                category_post_id: params.category_post_id,
-            };
-            if (!checkParamsValid(paramsCheckValid)) {
-                return res.json(responseError(4004));
-            }
-            const daycurrent = getDateYMDHMSCurrent();
-            const columns = 'title, content, category_post_id, published_date, created_date, created_by, status';
-            const values = `N'${params.title || 'NULL'}',
-                            N'${params.content || 'NULL'}',
-                            ${params.category_post_id || 'NULL'},
-                            N'${params.published_date || 'NULL'}', 
-                            N'${daycurrent}',
-                            ${params.created_by || 'NULL'}, 
-                            2`;
-            const strSql = insertInto('posts', columns, values);
-            await executeSql(strSql, async (_data, err) => {
-                if (err) {
-                    return res.json(responseError(4002, err));
+            beforeUpload(req, res, async () => {
+                req.checkBody(createValidator);
+                const errors = req.validationErrors();
+                if (errors) {
+                    if (!isEmpty(req.files)) {
+                        req.files.map((file) => {
+                            deleteFile(file.path);
+                        });
+                    }
+                    return res.json(responseError(1002, errors));
                 }
-                return res.json(responseSuccess(2003));
-            });
+                const params = req.body;
+                const paramsCheckValid = {
+                    title: params.title,
+                    category_post_id: params.category_post_id,
+                };
+                if (!checkParamsValid(paramsCheckValid)) {
+                    if (!isEmpty(req.files)) {
+                        req.files.map((file) => {
+                            deleteFile(file.path);
+                        });
+                    }
+                    return res.json(responseError(4004));
+                }
+                if (!isEmpty(req.files)) {
+                    req.files.map((file) => {
+                        const stringPath = file.path.split('\\').join('/');
+                        params[file.fieldname] = sliceString(stringPath, '/uploads');
+                    });
+                }
+                const daycurrent = getDateYMDHMSCurrent();
+                let columns = 'title, content, category_post_id, published_date, created_date, created_by, status';
+                let values = `N'${params.title || 'NULL'}',
+                                N'${params.content || 'NULL'}',
+                                ${params.category_post_id || 'NULL'},
+                                N'${params.published_date || 'NULL'}', 
+                                N'${daycurrent}',
+                                ${params.created_by || 'NULL'}, 
+                                1`;
+                if (!isEmpty(params.avatar)) {
+                    columns += ',avatar';
+                    values += `,N'${params.avatar || 'NULL'}'`;
+                }
+                const strSql = insertInto('posts', columns, values);
+                await executeSql(strSql, async (_data, err) => {
+                    if (err) {
+                        if (!isEmpty(req.files)) {
+                            req.files.map((file) => {
+                                deleteFile(file.path);
+                            });
+                        }
+                        return res.json(responseError(4002, err));
+                    }
+                    return res.json(responseSuccess(2003));
+                });
+            }, uploadImage);
         } catch (error) {
+            if (!isEmpty(req.files)) {
+                req.files.map((file) => {
+                    deleteFile(file.path);
+                });
+            }
             return res.json(responseError(1003, error));
         }
     },
     getInfo: async (id) => {
         try {
-            const select = 'id, title, category_post_id, published_date, content';
+            const select = 'id, title, avatar, category_post_id, published_date, content';
             const where = `id=${id}`;
             const sql = getDataWhere('posts', select, where);
             const info = await new Promise((resolve, reject) => {
@@ -132,36 +173,72 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            req.checkBody(updateValidator);
-            const errors = req.validationErrors();
-            if (errors) {
-                return res.json(responseError(1002, errors));
-            }
-            const params = req.body;
-            const paramsCheckValid = {
-                title: params.title,
-                category_post_id: params.category_post_id,
-            };
-            if (!checkParamsValid(paramsCheckValid)) {
-                return res.json(responseError(4004));
-            }
-            const daycurrent = getDateYMDHMSCurrent();
-            const values = `title=N'${params.title || 'NULL'}',
-                            content=N'${params.content || 'NULL'}',
-                            category_post_id=${params.category_post_id || 'NULL'},
-                            published_date=N'${params.published_date || 'NULL'}', 
-                            updated_date=N'${daycurrent}',
-                            updated_by=${params.updated_by || 'NULL'}, 
-                            status=1`;
-            const where = `id = ${params.id}`;
-            const strSql = updateSet('posts', values, where);
-            await executeSql(strSql, async (_data, err) => {
-                if (err) {
-                    return res.json(responseError(4005, err));
+            beforeUpload(req, res, async () => {
+                req.checkBody(updateValidator);
+                const errors = req.validationErrors();
+                if (errors) {
+                    if (!isEmpty(req.files)) {
+                        req.files.map((file) => {
+                            deleteFile(file.path);
+                        });
+                    }
+                    return res.json(responseError(1002, errors));
                 }
-                return res.json(responseSuccess(2004));
-            });
+                const params = req.body;
+                const avatarOld = params.avatarOld;
+                const paramsCheckValid = {
+                    title: params.title,
+                    category_post_id: params.category_post_id,
+                };
+                if (!checkParamsValid(paramsCheckValid)) {
+                    if (!isEmpty(req.files)) {
+                        req.files.map((file) => {
+                            deleteFile(file.path);
+                        });
+                    }
+                    return res.json(responseError(4004));
+                }
+                if (!isEmpty(req.files)) {
+                    req.files.map((file) => {
+                        const stringPath = file.path.split('\\').join('/');
+                        params[file.fieldname] = sliceString(stringPath, '/uploads');
+                    });
+                }
+                const daycurrent = getDateYMDHMSCurrent();
+                let values = `title=N'${params.title || 'NULL'}',
+                                content=N'${params.content || 'NULL'}',
+                                category_post_id=${params.category_post_id || 'NULL'},
+                                published_date=N'${params.published_date || 'NULL'}', 
+                                updated_date=N'${daycurrent}',
+                                updated_by=${params.updated_by || 'NULL'}, 
+                                status=1`;
+                if (!isEmpty(params.avatar)) {
+                    values += `,avatar = N'${params.avatar || 'NULL'}'`;
+                }
+                const where = `id = ${params.id}`;
+                const strSql = updateSet('posts', values, where);
+                await executeSql(strSql, async (_data, err) => {
+                    if (err) {
+                        if (!isEmpty(req.files)) {
+                            req.files.map((file) => {
+                                deleteFile(file.path);
+                            });
+                        }
+                        return res.json(responseError(4005, err));
+                    }
+                    if (!isEmpty(params.avatar)) {
+                        const filePath = joinPath(`../public${avatarOld}`);
+                        deleteFile(filePath);
+                    }
+                    return res.json(responseSuccess(2004));
+                });
+            }, uploadImage);
         } catch (error) {
+            if (!isEmpty(req.files)) {
+                req.files.map((file) => {
+                    deleteFile(file.path);
+                });
+            }
             return res.json(responseError(1003, error));
         }
     },

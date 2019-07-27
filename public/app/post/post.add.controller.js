@@ -1,17 +1,26 @@
 (function () {
     angular.module('CLBKNCS')
         .controller('AddPostController', AddPostController);
-        AddPostController.$inject = ['$scope', 'PostService', 'logger', 'SharedService', 'ValidatorPost'];
+        AddPostController.$inject = ['$scope', 'PostService', 'logger', 'SharedService', 'ValidatorPost', 'UploadService'];
 
-    function AddPostController($scope, PostService, logger, SharedService, ValidatorPost) {
+    function AddPostController($scope, PostService, logger, SharedService, ValidatorPost, UploadService) {
         $scope.validator = ValidatorPost.validationOptions();
        
         $scope.formCreatePost = {};
         $scope.create = (form) => {
+            const files = {};
+            if (!isEmpty($scope.avatar)) {
+                files.avatar = $scope.avatar;
+            }
             const content = CKEDITOR.instances.content_post.getData();
             if (form.validate() && !isEmpty(content)) {
                 $scope.formCreatePost.content = content;
-                PostService.create($scope.formCreatePost).then((response) => {
+                UploadService.uploadFiles(
+                    'POST',
+                    '/admin/post/create',
+                    files,
+                    $scope.formCreatePost,
+                ).then((response) => {
                     if (response.Success) {
                         logger.success('Thêm thành công');
                         changeCss();

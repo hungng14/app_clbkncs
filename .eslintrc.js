@@ -21,6 +21,7 @@ module.exports = {
         'consistent-return': 'off',
         'no-restricted-syntax': 'off',
         'array-callback-return': 'off',
-        'no-unused-vars': 'off'
+        'no-unused-vars': 'off',
+        'prefer-destructuring': 'off'
     }
 };

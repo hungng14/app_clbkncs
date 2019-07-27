@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 const {
     responseError,
     responseSuccess,
@@ -8,6 +9,8 @@ const {
     isEmpty,
     sliceString,
     getDateYMDHMSCurrent,
+    deleteFile,
+    joinPath,
 } = require('./../../libs/shared');
 const { TITLE_ADMIN } = require('../../configs/constants');
 const {
@@ -55,9 +58,16 @@ module.exports = {
                 req.checkBody(updateValidator);
                 const errors = req.validationErrors();
                 if (errors) {
+                    if (!isEmpty(req.files)) {
+                        req.files.map((file) => {
+                            deleteFile(file.path);
+                        });
+                    }
                     return res.json(responseError(1002, errors));
                 }
                 const params = req.body;
+                const avatarOld = params.avatarOld;
+                const logoOld = params.logoOld;
                 if (!isEmpty(req.files)) {
                     req.files.map((file) => {
                         const stringPath = file.path.split('\\').join('/');
@@ -84,12 +94,32 @@ module.exports = {
                 const where = `id = ${params.id}`;
                 const strSql = updateSet('info_club', values, where);
                 await executeSql(strSql, (data, err) => {
-                    if (err) { return res.json(responseError(4002, err)); }
+                    if (err) {
+                        if (!isEmpty(req.files)) {
+                            req.files.map((file) => {
+                                deleteFile(file.path);
+                            });
+                        }
+                        return res.json(responseError(4002, err));
+                    }
+                    if (!isEmpty(params.avatar)) {
+                        const filePath = joinPath(`../public${avatarOld}`);
+                        deleteFile(filePath);
+                    }
+                    if (!isEmpty(params.logo)) {
+                        const filePath = joinPath(`../public${logoOld}`);
+                        deleteFile(filePath);
+                    }
                     return res.json(responseSuccess(2004));
                 });
             }, uploadImage);
         } catch (err) {
-            res.status(500).json(responseError(1001, err));
+            if (!isEmpty(req.files)) {
+                req.files.map((file) => {
+                    deleteFile(file.path);
+                });
+            }
+            return res.status(500).json(responseError(1001, err));
         }
     },
 };

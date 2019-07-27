@@ -8,7 +8,6 @@
         $scope.login = (form) => {
             if (form.validate()) {
                 LoginService.login($scope.formLogin).then((response) => {
-                    console.log(response)
                     if (response.Success) {
                         window.location.href = '/admin';
                     } else {
