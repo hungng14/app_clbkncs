@@ -29,7 +29,7 @@
         }
         
         function loadPageContent() {
-            angular.element('.page-content').css('display', 'block');
+            angular.element('.p-content-wr').css('display', 'block');
         }
 
         $scope.update = (form) => {
