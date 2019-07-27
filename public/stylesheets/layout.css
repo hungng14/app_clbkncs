@@ -1,3 +1,24 @@
+/* common */
+body{
+    background: rgb(226, 226, 226)
+}
+.mgr-10{
+    margin-right: 10px;
+}
+
+.mgl-10{
+    margin-left: 10px;
+}
+
+.mgt-20{
+    margin-top: 20px;
+}
+
+.mgb-20{
+    margin-bottom: 20px;
+}
+
+
 /* header */
 nav a.nav-brand{
     height: 50px !important;
@@ -14,4 +35,41 @@ nav .navbar-brand img{
     height: 100vh;
     background-size: cover;
     background-position: center;
+    max-height: 550px;
 }
+
+/* footer */
+footer div.contact.flex div.f-info{
+    flex: 1;
+    border: 1px solid #eee;
+    text-align: center;
+    height: 200px;
+}
+
+.fl-1{
+    flex: 1;
+}
+
+div.f-info i{
+    transform: scale(1.5);
+}
+
+div.f-info .i-title{
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: rgb(27, 27, 29);
+}
+
+div.f-info .i-title{
+    font-size: 1.2rem;
+}
+
+footer div.contact{
+    margin-bottom: 20px;
+}
+
+div.copyright{
+    line-height: normal !important;
+    padding: 10px;
+}
+
