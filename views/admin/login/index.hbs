@@ -13,12 +13,12 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Đăng nhập</h1>
               </div>
-              <form class="user" name="f_Login">
+              <form class="user" name="f_Login" ng-validate="validator">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" placeholder="Nhập tài khoản">
+                  <input type="text" ng-model="formLogin.username" name="username" class="form-control form-control-user" placeholder="Nhập tài khoản">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-user" placeholder="Mật khẩu">
+                  <input type="password" ng-model="formLogin.password" name="password" class="form-control form-control-user" placeholder="Mật khẩu">
                 </div>
                 <div class="form-group">
                   <div class="custom-control custom-checkbox small">

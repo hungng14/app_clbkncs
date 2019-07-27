@@ -20,6 +20,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'consistent-return': 'off',
         'no-restricted-syntax': 'off',
-        'array-callback-return': 'off'
+        'array-callback-return': 'off',
+        'no-unused-vars': 'off'
     }
 };

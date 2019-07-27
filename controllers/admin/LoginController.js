@@ -1,12 +1,10 @@
-const isEmpty = require('is-empty');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const {
     TITLE_ADMIN,
 } = require('../../configs/constants');
 
 const {
-    responseError, responseSuccess,
+    responseError, responseSuccess, isEmpty,
 } = require('../../libs/shared');
 
 module.exports = {
@@ -23,26 +21,26 @@ module.exports = {
         try {
             passport.authenticate('local', (err, user) => { // eslint-disable-line
                 if (err) {
-                    return res.status(400).json(responseError(1001, err));
+                    return res.status(400).json({err});
                 }
                 if (!user) {
                     return res.json(responseError(1050));
                 }
-                req.logIn(user, (err) => { // eslint-disable-line
+                req.login(user, (err) => { // eslint-disable-line
                     if (err) {
                         return next(err);
                     }
-                    return res.json(responseSuccess(2050, user));
+                    return res.json(responseSuccess(2050));
                 });
             })(req, res, next);
         } catch (error) {
-            return res.json(responseError(1003, error));
+            return res.status(500).json(responseError(1001, error));
         }
     },
     logout: async (req, res) => { // eslint-disable-line
         try {
             req.logout();
-            res.redirect('/');
+            res.redirect('/login');
         } catch (error) {
             return res.json(error);
         }
@@ -53,29 +51,5 @@ module.exports = {
         } else {
             res.json({});
         }
-    },
-    createJSWToken: (req, res) => {
-        const secretKey = 'w1lnWEN63FPKxBNmxHN7WpfW2IoYVYca5moqIUKfWesL1Ykwv34iR5xwfWLy';
-        const environmentId = 'LJRQ1bju55p6a47RwadH';
-        const payload = {
-            iss: environmentId,
-            user: {
-                id: '123',
-                email: 'joe.doe@example.com',
-                name: 'Joe Doe'
-            },
-            services: {
-                'ckeditor-collaboration': {
-                    permissions: {
-                        '*': 'write'
-                    }
-                }
-            }
-        };
-
-        const result = jwt.sign(payload, secretKey, {
-            algorithm: 'HS256',
-        });
-        res.send(result);
     },
 };

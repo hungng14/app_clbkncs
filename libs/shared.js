@@ -23,21 +23,27 @@ module.exports = {
             fs.unlinkSync(filePath);
         }
     },
-    getInfoUserSession: (req) => {
-        const { user } = req.session.passport;
-        const Info = {
-            Name: user.Info.FullName,
-            RoleName: user.RoleName,
-            Role: user.RoleCode,
-            Language: user.Language,
+    getInfoUserDecoded: (decoded = {}) => {
+        const { filterObject } = module.exports;
+        // eslint-disable-next-line no-param-reassign
+        decoded = filterObject(decoded);
+        const info = {
+            name: decoded.name,
+            username: decoded.username,
+            id: decoded.id,
+            position: decoded.position,
+            avatar: decoded.avatar || '/images/profile.jpg',
         };
-        return Info;
+        return info;
     },
-    getHeaders: (req) => {
-        const { Token } = req.session.passport.user;
-        return {
-            'x-access-token': Token,
-        };
+    filterObject: (obj = {}) => {
+        const newObj = {};
+        for (const prop in obj) {
+            if (String(obj[prop]).toLowerCase() != 'null') {
+                newObj[prop] = obj[prop];
+            }
+        }
+        return newObj;
     },
     isNumberInteger: value => Number.isInteger(value),
     isNumber: value => (Number(value) == value ? true : false),

@@ -47,8 +47,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 app.use(cors());
 app.use(expressValidator());
 app.use(favicon(path.join(__dirname, 'public', 'logo_club.ico')));

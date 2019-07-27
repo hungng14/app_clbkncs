@@ -205,11 +205,11 @@ module.exports = {
             }
             const password = await UserService.hashPassword(params.password);
             const daycurrent = getDateYMDHMSCurrent();
-            const columns = 'username, pass_word, created_date, status, last_login';
+            const columns = 'username, password, created_date, status';
             const values = `N'${params.username || 'NULL'}', 
                             N'${password || 'NULL'}', 
                             N'${daycurrent}', 
-                            1, N'NULL'`;
+                            1`;
             const strSqlAccount = insertInto('account', columns, values);
             await executeSql(strSqlAccount, async (data, err) => {
                 if (err) { return res.json(responseError(4002, err)); }

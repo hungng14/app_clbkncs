@@ -10,11 +10,11 @@
                     method,
                     url,
                     data,
-                    params: data
+                    params: data,
                 })
                 .then((response) => {
                     return response.data;
-                }).catch(() => {
+                }).catch((err) => {
                     return handlingError(msgError)
                 })
         };

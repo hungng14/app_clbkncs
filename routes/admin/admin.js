@@ -1,12 +1,24 @@
 const express = require('express');
 
 const admin = express.Router();
-// const auth = require('../../libs/passport');
+const auth = require('../../configs/passport');
+const { verifyJWT } = require('../../configs/jsonwebtoken');
+const { isEmpty, responseError } = require('../../libs/shared');
 
 /* auth */
-// admin.use((req, res, next) => {
-//     auth.isAuthenticated(req, res, next);
-// });
+admin.use((req, res, next) => {
+    auth.isAuthenticated(req, res, next);
+});
+
+admin.use(async (req, res, next) => {
+    const { token } = req.session.passport.user;
+    const decoded = await verifyJWT(token);
+    if (isEmpty(decoded)) {
+        return res.json(responseError(1004));
+    }
+    req.decoded = decoded;
+    next();
+});
 /* home */
 require('./DashboardRoute')(admin);
 

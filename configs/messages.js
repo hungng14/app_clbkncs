@@ -3,6 +3,8 @@ exports.CODES_ERROR = {
     1001: 'Có lỗi xảy ra. Hãy thử lại lần sau!',
     1002: 'Dữ liệu không đúng. Vui lòng kiểm tra lại',
     1003: 'Có lỗi xảy ra.',
+    1004: 'Hết phiên làm việc. Vui lòng đăng nhập lại.',
+
 
     /* login */
     1050: 'Tài khoản hoặc mật khẩu không đúng.',
