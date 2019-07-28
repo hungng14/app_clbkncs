@@ -4,6 +4,7 @@ const {
     responseSuccess,
     getDateYMDHMSCurrent,
     checkParamsValid,
+    getInfoUserDecoded,
 } = require('./../../libs/shared');
 const {
     insertInto, getDataWhere,
@@ -39,11 +40,12 @@ module.exports = {
             if (!checkParamsValid(params)) {
                 return res.json(responseError(4004));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'category_name, created_date, created_by, status';
             const values = `N'${params.category_name || ''}',
                             N'${daycurrent}',
-                            ${params.created_by || ''}, 
+                            ${userDecoded.id || '0'}, 
                             1`;
             const strSql = insertInto('category_posts', columns, values);
             await executeSql(strSql, (data, err) => {

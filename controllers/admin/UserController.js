@@ -95,6 +95,7 @@ module.exports = {
             if (!checkParamsValid(params)) {
                 return res.json(responseError(4004));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
             const values = `N'${params.name || ''}',
@@ -105,7 +106,7 @@ module.exports = {
                             N'${params.birthday || ''}',
                             N'${TYPE_USER.MEMBER}',
                             N'${daycurrent}',
-                            ${params.created_by || '0'}, 
+                            ${userDecoded.id || '0'}, 
                             1`;
             const strSql = insertInto('users', columns, values);
             await executeSql(strSql, (data, err) => {
@@ -127,6 +128,7 @@ module.exports = {
             if (!checkParamsValid(params)) {
                 return res.json(responseError(4004));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const daycurrent = getDateYMDHMSCurrent();
             const values = `name = N'${params.name || ''}',
             address = N'${params.address || ''}', 
@@ -134,7 +136,7 @@ module.exports = {
             phone = N'${params.phone || ''}', 
             birthday = N'${params.birthday || ''}',
             updated_date = N'${daycurrent}', 
-            updated_by = ${params.updated_by || '0'}`;
+            updated_by = ${userDecoded.id || '0'}`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('users', values, where);
             await executeSql(strSql, (data, err) => {
@@ -152,9 +154,10 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const daycurrent = getDateYMDHMSCurrent();
-            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${userDecoded.id || '0'}`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('users', values, where);
             await executeSql(strSql, (data, err) => {
@@ -193,6 +196,7 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             if (!compareValue(params.password, params.repassword)) {
                 const err = {
@@ -232,7 +236,7 @@ module.exports = {
                                     N'${params.birthday || ''}',
                                     N'${TYPE_USER.ACCOUNT}',
                                     N'${daycurrent}',
-                                    ${params.created_by || ''}, 
+                                    ${userDecoded.id || '0'}, 
                                     1`;
                     const strSql = insertInto('users', columns, values);
                     await executeSql(strSql, async (_data, err) => {
@@ -295,6 +299,7 @@ module.exports = {
             if (!checkParamsValid(params)) {
                 return res.json(responseError(4004));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const daycurrent = getDateYMDHMSCurrent();
             const values = `updated_date = N'${daycurrent}'`;
             const where = `id = ${params.account_id}`;
@@ -308,7 +313,7 @@ module.exports = {
                                 phone = N'${params.phone || ''}', 
                                 birthday = N'${params.birthday || ''}',
                                 updated_date = N'${daycurrent}', 
-                                updated_by = ${params.updated_by || ''}`;
+                                updated_by = ${userDecoded.id || '0'}`;
                 const where = `account_id = ${params.account_id}`;
                 const strSql = updateSet('users', values, where);
                 await executeSql(strSql, (data, err) => {
@@ -327,6 +332,7 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const daycurrent = getDateYMDHMSCurrent();
             const values = `status = 4, updated_date = N'${daycurrent}'`;
@@ -334,7 +340,7 @@ module.exports = {
             const strSql = updateSet('account', values, where);
             await executeSql(strSql, async (data, err) => {
                 if (err) { return res.json(responseError(4002, err)); }
-                const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+                const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${userDecoded.id || 'NULL'}`;
                 const where = `account_id = ${params.account_id}`;
                 const strSql = updateSet('users', values, where);
                 await executeSql(strSql, (data, err) => {

@@ -34,12 +34,12 @@ module.exports = {
     },
     add: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/department/add', {
                 layout: 'add_department',
                 title: TITLE_ADMIN,
                 activity: 'Department',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));
@@ -47,16 +47,18 @@ module.exports = {
     },
     edit: async (req, res) => { // eslint-disable-line
         try {
+            const info = getInfoUserDecoded(req.decoded);
             const { id } = req.query;
             const { getInfo } = module.exports;
-            const info = await getInfo(id);
-            const data = JSON.stringify(info);
-            if (!isEmpty(info)) {
+            const infoDepartment = await getInfo(id);
+            const data = JSON.stringify(infoDepartment);
+            if (!isEmpty(infoDepartment)) {
                 return res.render('admin/department/edit', {
                     layout: 'edit_department',
                     title: TITLE_ADMIN,
                     activity: 'Department',
                     data,
+                    info,
                 });
             }
             return response404(res);
@@ -84,6 +86,7 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const paramsCheckValid = {
                 title: params.title,
@@ -98,7 +101,7 @@ module.exports = {
                             N'${params.content || ''}',
                             N'${params.name || ''}', 
                             N'${daycurrent}',
-                            ${params.created_by || ''}, 
+                            ${userDecoded.id || '0'}, 
                             1`;
             const strSql = insertInto('department', columns, values);
             await executeSql(strSql, async (_data, err) => {
@@ -134,6 +137,7 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const paramsCheckValid = {
                 title: params.title,
@@ -147,7 +151,7 @@ module.exports = {
                             content=N'${params.content || ''}',
                             name=N'${params.name || ''}',
                             updated_date=N'${daycurrent}',
-                            updated_by=${params.updated_by || ''}, 
+                            updated_by=${userDecoded.id || '0'}, 
                             status=1`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('department', values, where);
@@ -168,9 +172,10 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const daycurrent = getDateYMDHMSCurrent();
-            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${userDecoded.id || '0'}`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('department', values, where);
             await executeSql(strSql, (data, err) => {

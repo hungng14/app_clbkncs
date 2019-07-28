@@ -8,7 +8,6 @@
        
         $scope.getInfo = async () => {
             $scope.infoPost = $scope.infoPost || {};
-            console.log($scope.infoPost)
             angular.element('#page-content').removeAttr('data-ng-init');
             // if (!isEmpty($scope.formUpdatePost.avatar)) {
             //     $scope.formUpdatePost.avatarOld = $scope.formUpdatePost.avatar;

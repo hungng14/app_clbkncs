@@ -66,6 +66,7 @@ module.exports = {
                     }
                     return res.json(responseError(1002, errors));
                 }
+                const userDecoded = getInfoUserDecoded(req.decoded);
                 const params = req.body;
                 const avatarOld = params.avatarOld;
                 const logoOld = params.logoOld;
@@ -86,7 +87,7 @@ module.exports = {
                             work_end_time = N'${params.work_end_time || ''}', 
                             field_of_activity = N'${params.field_of_activity || ''}', 
                             updated_date = N'${daycurrent}', 
-                            updated_by = ${params.updated_by || ''}`;
+                            updated_by = ${userDecoded.id || '0'}`;
                 if (!isEmpty(params.avatar)) {
                     values += `,avatar = N'${params.avatar || ''}'`;
                 }

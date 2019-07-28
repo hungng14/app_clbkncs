@@ -41,8 +41,8 @@ passport.use(new LocalStrategy({
             if (!checkParamsValid(params)) {
                 return done(responseError(4004));
             }
-            const select = `account.id, account.password, account.username,
-            users.name, users.position, users.avatar`;
+            const select = `account.password, account.username,
+            users.name, users.position, users.avatar, users.id`;
             const where = `account.username = N'${params.username}' AND account.status = 1`;
             const join = 'users ON  account.id = users.account_id';
             const sql = getDataJoinWhere('account', select, 'INNER', join, where);

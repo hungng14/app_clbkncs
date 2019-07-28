@@ -104,6 +104,7 @@ module.exports = {
                     }
                     return res.json(responseError(1002, errors));
                 }
+                const userDecoded = getInfoUserDecoded(req.decoded);
                 const params = req.body;
                 const paramsCheckValid = {
                     title: params.title,
@@ -130,7 +131,7 @@ module.exports = {
                                 ${params.category_post_id || ''},
                                 N'${params.published_date || ''}', 
                                 N'${daycurrent}',
-                                ${params.created_by || '0'}, 
+                                ${userDecoded.id || '0'}, 
                                 1`;
                 if (!isEmpty(params.avatar)) {
                     columns += ',avatar';
@@ -187,6 +188,7 @@ module.exports = {
                     }
                     return res.json(responseError(1002, errors));
                 }
+                const userDecoded = getInfoUserDecoded(req.decoded);
                 const params = req.body;
                 const avatarOld = params.avatarOld;
                 const paramsCheckValid = {
@@ -213,7 +215,7 @@ module.exports = {
                                 category_post_id=${params.category_post_id || ''},
                                 published_date=N'${params.published_date || ''}', 
                                 updated_date=N'${daycurrent}',
-                                updated_by=${params.updated_by || '0'}, 
+                                updated_by=${userDecoded.id || '0'}, 
                                 status=1`;
                 if (!isEmpty(params.avatar)) {
                     values += `,avatar = N'${params.avatar || ''}'`;
@@ -252,9 +254,10 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
+            const userDecoded = getInfoUserDecoded(req.decoded);
             const params = req.body;
             const daycurrent = getDateYMDHMSCurrent();
-            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+            const values = `status = 4, updated_date = N'${daycurrent}', updated_by = ${userDecoded.id || '0'}`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('posts', values, where);
             await executeSql(strSql, (data, err) => {
