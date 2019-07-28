@@ -9,7 +9,6 @@
         $scope.listMembers = () => {
             HomeService.listMembers().then((response) => {
                 $scope.members = response.Success ? (response.Data || []): [];
-                console.log(response);
             })
         }
         Promise.all([$scope.listMembers()]).then(() => { });

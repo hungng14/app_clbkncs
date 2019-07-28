@@ -64,3 +64,5 @@ typings/
 /obj
 /package-lock.json
 /web.config
+/public/images/post
+/public/uploads
