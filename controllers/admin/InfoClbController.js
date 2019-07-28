@@ -124,4 +124,20 @@ module.exports = {
             return res.status(500).json(responseError(1001, err));
         }
     },
+    getInfoView: async (req, res) => {
+        try {
+            const select = `info_club, info_club.slogan, info_club.address, info_club.phone, 
+            info_club.scales, info_club.avatar, info_club.logo, info_club.field_of_activity, 
+            info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
+            const where = 'info_club.status !=4';
+            const join = 'users ON  info_club.user_id = users.id';
+            const sql = getDataJoinWhere('info_club', select, 'INNER', join, where);
+            await executeSql(sql, (data, err) => {
+                if (err) { return res.json(responseError(4001, err)); }
+                return res.json(responseSuccess(2002, data.recordset[0]));
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
+        }
+    },
 };
