@@ -5,6 +5,7 @@ const {
     getDateYMDHMSCurrent,
     checkParamsValid,
     isEmpty,
+    getInfoUserDecoded,
 } = require('./../../libs/shared');
 const {
     insertInto, getDataWhere, updateSet,
@@ -20,12 +21,12 @@ const {
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/department/index', {
                 layout: 'department',
                 title: TITLE_ADMIN,
                 activity: 'Department',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));

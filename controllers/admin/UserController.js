@@ -11,6 +11,7 @@ const {
     compareValue,
     isEmpty,
     checkParamsValid,
+    getInfoUserDecoded,
 } = require('./../../libs/shared');
 const {
     insertInto, getDataWhere, getDataJoin, updateSet, getDataJoinWhere, removeRecord,
@@ -28,12 +29,12 @@ const {
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/user/index', {
                 layout: 'user',
                 title: TITLE_ADMIN,
                 activity: 'User',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));
@@ -335,7 +336,6 @@ module.exports = {
                     if (err) { return res.json(responseError(4002, err)); }
                     return res.json(responseSuccess(2005));
                 });
-                
             });
         } catch (error) {
             return res.json(responseError(1003, error));

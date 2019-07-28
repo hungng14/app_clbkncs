@@ -11,6 +11,7 @@ const {
     getDateYMDHMSCurrent,
     deleteFile,
     joinPath,
+    getInfoUserDecoded,
 } = require('./../../libs/shared');
 const { TITLE_ADMIN } = require('../../configs/constants');
 const {
@@ -25,12 +26,12 @@ const { updateValidator } = require('../../validator/InfoClbValidator');
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/infoClb/index', {
                 layout: 'infoClb',
                 title: TITLE_ADMIN,
                 activity: 'InfoClb',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));

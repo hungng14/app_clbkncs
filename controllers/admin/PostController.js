@@ -12,6 +12,7 @@ const {
     beforeUpload,
     deleteFile,
     joinPath,
+    getInfoUserDecoded,
 } = require('./../../libs/shared');
 
 const uploadImage = uploadFiles(storage('posts', 'images'), fileFilterImage, 'File');
@@ -30,12 +31,12 @@ const {
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/post/index', {
                 layout: 'post',
                 title: TITLE_ADMIN,
                 activity: 'Post',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));
@@ -43,12 +44,12 @@ module.exports = {
     },
     add: async (req, res) => { // eslint-disable-line
         try {
-            // const Info = getInfoUserSession(req);
+            const info = getInfoUserDecoded(req.decoded);
             res.render('admin/post/add', {
                 layout: 'add_post',
                 title: TITLE_ADMIN,
                 activity: 'Post',
-                // Info,
+                info,
             });
         } catch (err) {
             res.status(500).json(responseError(1001, err));
@@ -56,16 +57,18 @@ module.exports = {
     },
     edit: async (req, res) => { // eslint-disable-line
         try {
+            const info = getInfoUserDecoded(req.decoded);
             const { id } = req.query;
             const { getInfo } = module.exports;
-            const info = await getInfo(id);
-            const data = JSON.stringify(info);
+            const infoPost = await getInfo(id);
+            const data = JSON.stringify(infoPost);
             if (!isEmpty(info)) {
                 return res.render('admin/post/edit', {
                     layout: 'edit_post',
                     title: TITLE_ADMIN,
                     activity: 'Post',
                     data,
+                    info,
                 });
             }
             return response404(res);
@@ -81,7 +84,7 @@ module.exports = {
             const join = 'category_posts ON  posts.category_post_id = category_posts.id';
             const sql = getDataJoinWhere('posts', select, 'INNER', join, where);
             await executeSql(sql, (data, err) => {
-                if (err) { return res.json(responseError(4000, err));}
+                if (err) { return res.json(responseError(4000, err)); }
                 return res.json(responseSuccess(2001, data.recordset));
             });
         } catch (error) {

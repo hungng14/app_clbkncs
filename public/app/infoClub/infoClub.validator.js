@@ -47,6 +47,9 @@
                             required: true,
                             isEmail: true,
                         },
+                        field_of_activity: {
+                            required: true,
+                        },
                     },
                     errorPlacement: function (error, element) { // render error placement for each input type
                         return false;
