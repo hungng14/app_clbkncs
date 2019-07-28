@@ -62,7 +62,7 @@ module.exports = {
             const { getInfo } = module.exports;
             const infoPost = await getInfo(id);
             const data = JSON.stringify(infoPost);
-            if (!isEmpty(info)) {
+            if (!isEmpty(infoPost)) {
                 return res.render('admin/post/edit', {
                     layout: 'edit_post',
                     title: TITLE_ADMIN,
@@ -125,16 +125,16 @@ module.exports = {
                 }
                 const daycurrent = getDateYMDHMSCurrent();
                 let columns = 'title, content, category_post_id, published_date, created_date, created_by, status';
-                let values = `N'${params.title || 'NULL'}',
-                                N'${params.content || 'NULL'}',
-                                ${params.category_post_id || 'NULL'},
-                                N'${params.published_date || 'NULL'}', 
+                let values = `N'${params.title || ''}',
+                                N'${params.content || ''}',
+                                ${params.category_post_id || ''},
+                                N'${params.published_date || ''}', 
                                 N'${daycurrent}',
-                                ${params.created_by || 'NULL'}, 
+                                ${params.created_by || '0'}, 
                                 1`;
                 if (!isEmpty(params.avatar)) {
                     columns += ',avatar';
-                    values += `,N'${params.avatar || 'NULL'}'`;
+                    values += `,N'${params.avatar || ''}'`;
                 }
                 const strSql = insertInto('posts', columns, values);
                 await executeSql(strSql, async (_data, err) => {
@@ -208,15 +208,15 @@ module.exports = {
                     });
                 }
                 const daycurrent = getDateYMDHMSCurrent();
-                let values = `title=N'${params.title || 'NULL'}',
-                                content=N'${params.content || 'NULL'}',
-                                category_post_id=${params.category_post_id || 'NULL'},
-                                published_date=N'${params.published_date || 'NULL'}', 
+                let values = `title=N'${params.title || ''}',
+                                content=N'${params.content || ''}',
+                                category_post_id=${params.category_post_id || ''},
+                                published_date=N'${params.published_date || ''}', 
                                 updated_date=N'${daycurrent}',
-                                updated_by=${params.updated_by || 'NULL'}, 
+                                updated_by=${params.updated_by || '0'}, 
                                 status=1`;
                 if (!isEmpty(params.avatar)) {
-                    values += `,avatar = N'${params.avatar || 'NULL'}'`;
+                    values += `,avatar = N'${params.avatar || ''}'`;
                 }
                 const where = `id = ${params.id}`;
                 const strSql = updateSet('posts', values, where);
@@ -260,6 +260,21 @@ module.exports = {
             await executeSql(strSql, (data, err) => {
                 if (err) { return res.json(responseError(4002, err)); }
                 return res.json(responseSuccess(2005));
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
+        }
+    },
+    listTitleView: async (req, res) => {
+        try {
+            const select = `posts.id, posts.title, posts.category_post_id, posts.published_date, 
+            posts.created_date, posts.avatar, category_posts.category_name`;
+            const where = 'posts.status = 1 ORDER BY posts.created_date DESC';
+            const join = 'category_posts ON  posts.category_post_id = category_posts.id';
+            const sql = getDataJoinWhere('posts', select, 'INNER', join, where);
+            await executeSql(sql, (data, err) => {
+                if (err) { return res.json(responseError(4000, err)); }
+                return res.json(responseSuccess(2001, data.recordset));
             });
         } catch (error) {
             return res.json(responseError(1003, error));

@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content" ng-controller="NewsController">
     <div class="divider mb-5"></div>
     <main class="container-fluid">
         <div class="ct-page">
@@ -9,98 +9,30 @@
                     </h3>
                 </div>
                 <div class="i-content">
-                    <div class="n-b p-4 mt-2 bd-1">
+                    <div class="n-b p-4 mt-2 bd-1" ng-repeat="item in listnews">
                         <div class="ct-box ">
                             <div class="img-wr-pro">
-                                <a href="/news/detail">
-                                    <img src="/images/store/paris.jpg" alt="">
+                                <a href="/news/detail?id=\{{item.id}}">
+                                    <img ng-src="\{{item.avatar}}" alt="">
                                 </a>
                             </div>
                             <div class="ct-wr-in">
                                 <div class="n-b-title text-uppercase mt-2">
                                     <span class="type-n">
-                                        <a href="/news/detail">
+                                        <a href="/news/detail?id=\{{item.id}}" ng-bind="item.category_name">
                                             Loại tin tức
                                         </a>
                                     </span>
-                                    <span class="date-publised">12-02-2019 15:20:11</span>
+                                    <span class="date-publised" ng-bind="item.created_date | formatDateToDMY"></span>
                                 </div>
                                 <div class="n-b-content">
-                                    <a href="/news/detail">
-                                        Trump made the remarks to reporters in the Oval Office, when discussing how he
-                                        was
-                                        going to his residence in Bedminster, N.J. in August. He said that such trips
-                                        aren’t
-                                        a vacation and that presidential away days are often used for maintenance on the
-                                        White House
+                                    <a href="/news/detail?id=\{{item.id}}" ng-bind="item.title">
                                     </a>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="hr mt-2"></div>
-                    <div class="n-b p-4 mt-2 bd-1">
-                        <div class="ct-box d-flex">
-                            <div class="img-wr-pro">
-                                <a href="">
-                                    <img src="/images/store/paris.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="ct-wr-in">
-                                <div class="n-b-title text-uppercase mt-2">
-                                    <span class="type-n">
-                                        <a href="">
-                                            Loại tin tức
-                                        </a>
-                                    </span>
-                                    <span class="date-publised">12-02-2019 15:20:11</span>
-                                </div>
-                                <div class="n-b-content">
-                                    <a href="">
-                                        Trump made the remarks to reporters in the Oval Office, when discussing how he
-                                        was
-                                        going to his residence in Bedminster, N.J. in August. He said that such trips
-                                        aren’t
-                                        a vacation and that presidential away days are often used for maintenance on the
-                                        White House
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hr mt-2"></div>
-                    <div class="n-b p-4 mt-2 bd-1">
-                        <div class="ct-box d-flex">
-                            <div class="img-wr-pro">
-                                <a href="">
-                                    <img src="/images/store/paris.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="ct-wr-in">
-                                <div class="n-b-title text-uppercase mt-2">
-                                    <span class="type-n">
-                                        <a href="">
-                                            Loại tin tức
-                                        </a>
-                                    </span>
-                                    <span class="date-publised">12-02-2019 15:20:11</span>
-                                </div>
-                                <div class="n-b-content">
-                                    <a href="">
-                                        Trump made the remarks to reporters in the Oval Office, when discussing how he
-                                        was
-                                        going to his residence in Bedminster, N.J. in August. He said that such trips
-                                        aren’t
-                                        a vacation and that presidential away days are often used for maintenance on the
-                                        White House
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="pagination-wr mt-1">
                     <nav aria-label="navigation">

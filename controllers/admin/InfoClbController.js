@@ -76,22 +76,22 @@ module.exports = {
                     });
                 }
                 const daycurrent = getDateYMDHMSCurrent();
-                let values = `slogan = N'${params.slogan || 'NULL'}',
-                            address = N'${params.address || 'NULL'}', 
-                            email = N'${params.email || 'NULL'}', 
-                            phone = N'${params.phone || 'NULL'}', 
-                            scales = N'${params.scales || 'NULL'}', 
-                            user_id = ${params.user_id || 'NULL'}, 
-                            work_start_time = N'${params.work_start_time || 'NULL'}', 
-                            work_end_time = N'${params.work_end_time || 'NULL'}', 
-                            field_of_activity = N'${params.field_of_activity || 'NULL'}', 
+                let values = `slogan = N'${params.slogan || ''}',
+                            address = N'${params.address || ''}', 
+                            email = N'${params.email || ''}', 
+                            phone = N'${params.phone || ''}', 
+                            scales = N'${params.scales || ''}', 
+                            user_id = ${params.user_id || ''}, 
+                            work_start_time = N'${params.work_start_time || ''}', 
+                            work_end_time = N'${params.work_end_time || ''}', 
+                            field_of_activity = N'${params.field_of_activity || ''}', 
                             updated_date = N'${daycurrent}', 
-                            updated_by = ${params.updated_by || 'NULL'}`;
+                            updated_by = ${params.updated_by || ''}`;
                 if (!isEmpty(params.avatar)) {
-                    values += `,avatar = N'${params.avatar || 'NULL'}'`;
+                    values += `,avatar = N'${params.avatar || ''}'`;
                 }
                 if (!isEmpty(params.logo)) {
-                    values += `,logo = N'${params.logo || 'NULL'}'`;
+                    values += `,logo = N'${params.logo || ''}'`;
                 }
                 const where = `id = ${params.id}`;
                 const strSql = updateSet('info_club', values, where);

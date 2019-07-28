@@ -40,4 +40,7 @@ require('./RoleRoute')(admin);
 /* department */
 require('./DepartmentRoute')(admin);
 
+/* upload files */
+require('./UploadFileRoute')(admin);
+
 module.exports = admin;

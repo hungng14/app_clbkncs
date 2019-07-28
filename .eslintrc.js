@@ -22,6 +22,7 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'array-callback-return': 'off',
         'no-unused-vars': 'off',
-        'prefer-destructuring': 'off'
+        'prefer-destructuring': 'off',
+        'prefer-promise-reject-errors': 'off'
     }
 };

@@ -21,7 +21,7 @@ module.exports = {
             const where = 'status = 1';
             const sql = getDataWhere('category_posts', select, where);
             await executeSql(sql, (data, err) => {
-                if (err) { return res.json(responseError(4000, err));}
+                if (err) { return res.json(responseError(4000, err)); }
                 return res.json(responseSuccess(2001, data.recordset));
             });
         } catch (error) {
@@ -41,9 +41,9 @@ module.exports = {
             }
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'category_name, created_date, created_by, status';
-            const values = `N'${params.category_name || 'NULL'}',
+            const values = `N'${params.category_name || ''}',
                             N'${daycurrent}',
-                            ${params.created_by || 'NULL'}, 
+                            ${params.created_by || ''}, 
                             1`;
             const strSql = insertInto('category_posts', columns, values);
             await executeSql(strSql, (data, err) => {

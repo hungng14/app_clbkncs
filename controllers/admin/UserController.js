@@ -97,15 +97,15 @@ module.exports = {
             }
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
-            const values = `N'${params.name || 'NULL'}',
-                            N'${params.address || 'NULL'}',
-                            N'${params.avatar || 'NULL'}',
-                            N'${params.position || 'NULL'}', 
-                            N'${params.phone || 'NULL'}', 
-                            N'${params.birthday || 'NULL'}',
+            const values = `N'${params.name || ''}',
+                            N'${params.address || ''}',
+                            N'${params.avatar || '/images/profile.png'}',
+                            N'${params.position || ''}', 
+                            N'${params.phone || ''}', 
+                            N'${params.birthday || ''}',
                             N'${TYPE_USER.MEMBER}',
                             N'${daycurrent}',
-                            ${params.created_by || 'NULL'}, 
+                            ${params.created_by || '0'}, 
                             1`;
             const strSql = insertInto('users', columns, values);
             await executeSql(strSql, (data, err) => {
@@ -128,8 +128,13 @@ module.exports = {
                 return res.json(responseError(4004));
             }
             const daycurrent = getDateYMDHMSCurrent();
-            const values = `name = N'${params.name || 'NULL'}',address = N'${params.address || 'NULL'}', position = N'${params.position || 'NULL'}', 
-            phone = N'${params.phone || 'NULL'}', birthday = N'${params.birthday || 'NULL'}',updated_date = N'${daycurrent}', updated_by = ${params.updated_by || 'NULL'}`;
+            const values = `name = N'${params.name || ''}',
+            address = N'${params.address || ''}', 
+            position = N'${params.position || ''}', 
+            phone = N'${params.phone || ''}', 
+            birthday = N'${params.birthday || ''}',
+            updated_date = N'${daycurrent}', 
+            updated_by = ${params.updated_by || '0'}`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('users', values, where);
             await executeSql(strSql, (data, err) => {
@@ -218,16 +223,16 @@ module.exports = {
                     const account = !isEmpty(_data) ? (_data.recordset[0] || {}) : '';
                     const account_id = account.id;
                     const columns = 'account_id, name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
-                    const values = `${account_id || 'NULL'}, 
-                                    N'${params.name || 'NULL'}',
-                                    N'${params.address || 'NULL'}',
-                                    N'${params.avatar || 'NULL'}',
-                                    N'${params.position || 'NULL'}', 
-                                    N'${params.phone || 'NULL'}', 
-                                    N'${params.birthday || 'NULL'}',
+                    const values = `${account_id || ''}, 
+                                    N'${params.name || ''}',
+                                    N'${params.address || ''}',
+                                    N'${params.avatar || '/images/profile.png'}',
+                                    N'${params.position || ''}', 
+                                    N'${params.phone || ''}', 
+                                    N'${params.birthday || ''}',
                                     N'${TYPE_USER.ACCOUNT}',
                                     N'${daycurrent}',
-                                    ${params.created_by || 'NULL'}, 
+                                    ${params.created_by || ''}, 
                                     1`;
                     const strSql = insertInto('users', columns, values);
                     await executeSql(strSql, async (_data, err) => {
@@ -297,13 +302,13 @@ module.exports = {
             await executeSql(strSqlAccount, async (data, err) => {
                 if (err) { return res.json(responseError(4005, err)); }
                 const daycurrent = getDateYMDHMSCurrent();
-                const values = `name = N'${params.name || 'NULL'}',
-                                address = N'${params.address || 'NULL'}', 
-                                position = N'${params.position || 'NULL'}', 
-                                phone = N'${params.phone || 'NULL'}', 
-                                birthday = N'${params.birthday || 'NULL'}',
+                const values = `name = N'${params.name || ''}',
+                                address = N'${params.address || ''}', 
+                                position = N'${params.position || ''}', 
+                                phone = N'${params.phone || ''}', 
+                                birthday = N'${params.birthday || ''}',
                                 updated_date = N'${daycurrent}', 
-                                updated_by = ${params.updated_by || 'NULL'}`;
+                                updated_by = ${params.updated_by || ''}`;
                 const where = `account_id = ${params.account_id}`;
                 const strSql = updateSet('users', values, where);
                 await executeSql(strSql, (data, err) => {
@@ -336,6 +341,19 @@ module.exports = {
                     if (err) { return res.json(responseError(4002, err)); }
                     return res.json(responseSuccess(2005));
                 });
+            });
+        } catch (error) {
+            return res.json(responseError(1003, error));
+        }
+    },
+    listView: async (req, res) => {
+        try {
+            const select = 'id, name, avatar, position';
+            const where = `type = N'${TYPE_USER.MEMBER}' AND status != 4 ORDER BY users.created_date DESC`;
+            const sql = getDataWhere('users', select, where);
+            await executeSql(sql, (data, err) => {
+                if (err) { return res.json(responseError(4000, err)); }
+                return res.json(responseSuccess(2001, data.recordset));
             });
         } catch (error) {
             return res.json(responseError(1003, error));

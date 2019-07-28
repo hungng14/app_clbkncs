@@ -104,6 +104,12 @@ a{
     margin-right: 20px;
 }
 
+.img-wr-pro img{
+    width: 270px;
+    height: 170px;
+}
+
+
 .n-b-title .type-n a{
     color: var(--cl-green-clb);
     font-size: .75rem;

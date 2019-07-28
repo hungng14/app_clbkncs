@@ -94,11 +94,11 @@ module.exports = {
             }
             const daycurrent = getDateYMDHMSCurrent();
             const columns = 'title, content, name, created_date, created_by, status';
-            const values = `N'${params.title || 'NULL'}',
-                            N'${params.content || 'NULL'}',
-                            N'${params.name || 'NULL'}', 
+            const values = `N'${params.title || ''}',
+                            N'${params.content || ''}',
+                            N'${params.name || ''}', 
                             N'${daycurrent}',
-                            ${params.created_by || 'NULL'}, 
+                            ${params.created_by || ''}, 
                             1`;
             const strSql = insertInto('department', columns, values);
             await executeSql(strSql, async (_data, err) => {
@@ -143,11 +143,11 @@ module.exports = {
                 return res.json(responseError(4004));
             }
             const daycurrent = getDateYMDHMSCurrent();
-            const values = `title=N'${params.title || 'NULL'}',
-                            content=N'${params.content || 'NULL'}',
-                            name=N'${params.name || 'NULL'}',
+            const values = `title=N'${params.title || ''}',
+                            content=N'${params.content || ''}',
+                            name=N'${params.name || ''}',
                             updated_date=N'${daycurrent}',
-                            updated_by=${params.updated_by || 'NULL'}, 
+                            updated_by=${params.updated_by || ''}, 
                             status=1`;
             const where = `id = ${params.id}`;
             const strSql = updateSet('department', values, where);

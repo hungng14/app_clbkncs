@@ -6,12 +6,12 @@
 
     function HomeController($scope, HomeService, PaginationFactory, SharedService) {
         // const { filterObject } = SharedService;
-        // $scope.infoClb = () => {
-        //     HomeService.infoClb().then((response) => {
-        //         const info = response.Success ? (response.Data || {}) : {};
-        //         $scope.info = filterObject(info);
-        //     })
-        // }
-        // Promise.all([$scope.infoClb()]).then(() => { });
+        $scope.listMembers = () => {
+            HomeService.listMembers().then((response) => {
+                $scope.members = response.Success ? (response.Data || []): [];
+                console.log(response);
+            })
+        }
+        Promise.all([$scope.listMembers()]).then(() => { });
     }
 })();
