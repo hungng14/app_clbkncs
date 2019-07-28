@@ -39,7 +39,7 @@ module.exports = {
     getInfo: async (req, res) => {
         try {
             const select = `info_club.id, info_club.slogan, info_club.address, info_club.phone, 
-            info_club.scales, info_club.user_id, info_club.avatar, info_club.logo,
+            info_club.scales, info_club.user_id, info_club.avatar, info_club.logo, info_club.field_of_activity, 
             info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';
             const join = 'users ON  info_club.user_id = users.id';
@@ -83,6 +83,7 @@ module.exports = {
                             user_id = ${params.user_id || 'NULL'}, 
                             work_start_time = N'${params.work_start_time || 'NULL'}', 
                             work_end_time = N'${params.work_end_time || 'NULL'}', 
+                            field_of_activity = N'${params.field_of_activity || 'NULL'}', 
                             updated_date = N'${daycurrent}', 
                             updated_by = ${params.updated_by || 'NULL'}`;
                 if (!isEmpty(params.avatar)) {

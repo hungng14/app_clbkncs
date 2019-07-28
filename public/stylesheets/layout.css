@@ -73,3 +73,18 @@ div.copyright{
     padding: 10px;
 }
 
+@media only screen and (max-width: 500px) {
+    .contact.d-flex{
+        flex-direction: column !important;
+    }
+    div.f-info i{
+        transform: scale(1.1);
+    }
+    div.f-info .i-title {
+        font-size: 1rem;
+    }
+    div.f-info .i-content{
+        font-size: 1rem;
+    }
+}
+
