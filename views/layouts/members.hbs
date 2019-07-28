@@ -11,18 +11,17 @@
 
     <title>{{title}}</title>
 
-    {{> css}}
+    {{> users/css_common}}
     {{> users/css}}
 
 </head>
 
-<body>
+<body id="#page-top">
     {{> users/nav}}
     {{{ body }}}
     {{> users/footer}}
-
-
-    {{> js}}
+    {{> users/scroll-top}}
+    {{> users/js}}
 </body>
 
 </html>
