@@ -1,5 +1,7 @@
-<div class="page-content" id="page-home">
-    <header> </header>
+<div class="page-content" id="page-home" >
+    <header> 
+        <img ng-src="\{{info.avatar}}" class="img-home"  alt="">
+    </header>
     <div class="divider mb-5"></div>
     <main class="container-fluid">
         <div class="ct-page">
@@ -11,36 +13,30 @@
                 </div>
                 <div class="i-content d-flex flex-wrap">
                     <div class="i-b fl-1 text-center mgr-10 p-4 mt-2 flex justify-content-center">
-                        <div class="wr-ct">
-                            <img src="/images/store/paris.jpg" alt="">
+                        <div class="wr-ct logo-pro">
+                            <img >
                             <div class="i-b-title text-uppercase mt-2">
                                 Slogan
                             </div>
-                            <div class="i-b-content">
-                                Vui vẻ nhiệt tình
-                            </div>
+                            <div class="i-b-content" ng-bind="info.slogan || 'Vui vẻ nhiệt tình'"></div>
                         </div>
                     </div>
                     <div class="i-b fl-1 text-center p-4 mt-2 mgr-10 flex justify-content-center">
-                        <div class="wr-ct">
-                            <img src="/images/store/paris.jpg" alt="">
+                        <div class="wr-ct logo-pro">
+                            <img>
                             <div class="i-b-title text-uppercase mt-2">
                                 lĩnh vực hoạt động
                             </div>
-                            <div class="i-b-content">
-                                nguồn nhân lực
-                            </div>
+                            <div class="i-b-content" ng-bind="info.field_of_activity || 'nguồn nhân lực'"></div>
                         </div>
                     </div>
                     <div class="i-b fl-1 text-center p-4 mt-2 flex justify-content-center">
-                        <div class="wr-ct">
-                            <img src="/images/store/paris.jpg" alt="">
+                        <div class="wr-ct logo-pro">
+                            <img >
                             <div class="i-b-title text-uppercase mt-2">
                                 quy mô
                             </div>
-                            <div class="i-b-content">
-                                Trên 120 thành viên 5 ban chuyên môn
-                            </div>
+                            <div class="i-b-content" ng-bind="info.scales || 'Trên 120 thành viên 5 ban chuyên môn'"></div>
                         </div>
                     </div>
                 </div>

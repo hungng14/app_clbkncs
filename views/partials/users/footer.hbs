@@ -5,28 +5,26 @@
             <div class="address f-info p-2">
                 <i class="fas fa-map-marker-alt"></i>
                 <div class="i-title">Địa chỉ liên hệ</div>
-                <div class="i-content text-uppercase">
-                    học viện tài chính 58 lê văn hiên
-                </div>
+                <div class="i-content text-uppercase" ng-bind="info.address"></div>
             </div>
             <div class="mobile f-info p-2">
                 <i class="fas fa-mobile-alt"></i>
                 <div class="i-title">Hotline</div>
-                <div class="i-content">
+                <div class="i-content" ng-bind="info.phone">
                     0956565555
                 </div>
             </div>
             <div class="email f-info p-2">
                 <i class="far fa-envelope"></i>
                 <div class="i-title">Email</div>
-                <div class="i-content">
+                <div class="i-content" ng-bind="info.email">
                     abc@gmail.com
                 </div>
             </div>
             <div class="work-time f-info p-2">
                 <i class="far fa-clock"></i>
                 <div class="i-title">Giờ làm việc</div>
-                <div class="i-content">
+                <div class="i-content" ng-bind="info.work_start_time + ' - ' + info.work_end_time">
                     08:00 - 12:00
                 </div>
             </div>

@@ -126,7 +126,7 @@ module.exports = {
     },
     getInfoView: async (req, res) => {
         try {
-            const select = `info_club, info_club.slogan, info_club.address, info_club.phone, 
+            const select = `info_club.slogan, info_club.address, info_club.phone, 
             info_club.scales, info_club.avatar, info_club.logo, info_club.field_of_activity, 
             info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';

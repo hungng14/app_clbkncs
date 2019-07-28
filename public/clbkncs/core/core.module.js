@@ -5,4 +5,5 @@
             'ngCookies',
             'app.logger'
         ])
+        .constant('toastr', toastr)
 })();

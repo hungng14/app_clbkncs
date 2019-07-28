@@ -42,5 +42,14 @@
 			return response;
         }
 
+        this.filterObject = (obj = {}) => {
+            const newObj = {};
+            for (const prop in obj) {
+                if (String(obj[prop]).toLowerCase() != 'null') {
+                    newObj[prop] = obj[prop];
+                }
+            }
+            return newObj;
+        };
     }
 })();

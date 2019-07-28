@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="CLBKNCS">
 
 <head>
 
@@ -16,12 +16,18 @@
 
 </head>
 
-<body id="#page-top">
+<body id="#page-top"  ng-controller="InfoClubController">
     {{> users/nav}}
     {{{ body }}}
     {{> users/footer}}
     {{> users/scroll-top}}
     {{> users/js}}
+    {{> users/angular}}
+
+    <script src="/clbkncs/infoClub/infoClub.controller.js"></script>
+    <script src="/clbkncs/infoClub/infoClub.service.js"></script>
+    <script src="/clbkncs/shared/http.service.js"></script>
+    <script src="/clbkncs/shared/shared.service.js"></script>
 </body>
 
 </html>

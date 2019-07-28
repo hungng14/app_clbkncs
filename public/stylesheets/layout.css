@@ -31,11 +31,16 @@ nav .navbar-brand img{
 }
 
 #page-home header{
-    background-image: url(/images/store/paris.jpg); 
+    /* background-image: url(/images/store/paris.jpg);  */
     height: 100vh;
     background-size: cover;
     background-position: center;
     max-height: 550px;
+}
+
+#page-home header .img-home{
+    height: 100%;
+    width: 100%;
 }
 
 /* footer */
