@@ -1,0 +1,24 @@
+<div class="page-content" id="page-content" ng-controller="NewsDetailPostController" data-ng-init="infoPost = {{data}}; getInfo()">
+    <div class="divider mb-5"></div>
+    <main class="container-fluid">
+        <div class="ct-page">
+            <div class="info-clb box">
+                <div class="mb-title text-center">
+                    <h3 class="font-weight-bold text-uppercase" ng-bind="infoPost.title">
+                    </h3>
+                    <div class="n-b-title text-uppercase mt-2">
+                        <span class="type-n">
+                            <a href="" ng-bind="infoPost.category_name">
+                            </a>
+                        </span>
+                        <span class="date-publised" ng-bind="infoPost.created_date | formatDateToDMY"></span>
+                    </div>
+                </div>
+                <div class="hr mt-2"></div>
+                <div class="i-content mt-2" compilehtml content="infoPost.content">
+                </div>
+            </div>
+            <div class="divider mb-5"></div>
+    </main>
+    <div class="divider mb-5"></div>
+</div>

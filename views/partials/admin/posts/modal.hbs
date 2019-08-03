@@ -1,0 +1,84 @@
+<div class="modal fade" id="create_category" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mới danh mục</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_CreateCategory" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên danh mục <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formCreateCategory.category_name" name="category_name" class="form-control" placeholder="Tên danh mục">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="createCategory(f_CreateCategory)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_user" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật thành viên</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_UpdateUser" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.name" name="name" class="form-control" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.address" name="address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.phone" name="phone" class="form-control" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Vị trí</label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.position"  name="position" class="form-control" placeholder="Vị trí">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy"
+                                data-date-viewmode="years" data-date-today-highlight="true">
+                                <input type="text" class="form-control dashed-border" 
+                                    ng-model="formUpdate.birthday" name="birthday"
+                                    placeholder="Ngày sinh">
+                                <div class="form-control-focus"> </div>
+                                <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="update(f_UpdateUser)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

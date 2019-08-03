@@ -1,0 +1,31 @@
+<div class="page-content" ng-controller="MembersController">
+    <div class="divider mb-5"></div>
+    <main class="container-fluid">
+        <div class="introduce">
+            <div class="divider mb-5"></div>
+            <div class="member-clb box">
+                <div class="mb-title text-center">
+                    <h3 class="font-weight-bold text-uppercase">
+                        Thành viên câu lạc bộ
+                    </h3>
+                </div>
+                <div class="mb-content  d-flex flex-wrap">
+                    <div class="mb-b fl-1 text-center mgr-10 mt-2 flex justify-content-center"
+                        ng-repeat="item in members">
+                        <div class="wr-ct">
+                            <img ng-src="\{{item.avatar}}" alt="">
+                            <div class="mb-b-title text-uppercase mgt-20 font-weight-bolder" ng-bind="item.name">
+                            </div>
+                            <div class="mb-b-content" ng-bind="item.position">
+                            </div>
+                            <div class="mb-b-social">
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-facebook-square"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <div class="divider mb-5"></div>
+</div>

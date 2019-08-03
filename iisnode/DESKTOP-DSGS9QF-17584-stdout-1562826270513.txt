@@ -1,0 +1,24 @@
+server is running at port \\.\pipe\7aece133-ff64-4863-a60f-941aa7dfd0d3
+[0mGET /clbkncs/ [33m404 [0m108.866 ms - 1145[0m
+[0mGET /clbkncs/api [33m404 [0m3.942 ms - 1145[0m
+[0mGET /clbkncs/api [33m404 [0m3.786 ms - 1145[0m
+[0mGET /clbkncs/api [33m404 [0m2.558 ms - 1145[0m
+[0mGET /clbkncs/api [33m404 [0m3.146 ms - 1145[0m
+[0mGET /clbkncs/api [33m404 [0m5.573 ms - 1145[0m
+[0mGET /clbkncs/users [33m404 [0m2.981 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m3.982 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m4.859 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m10.518 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m5.655 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m3.842 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m3.476 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m4.529 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m3.068 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m4.275 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m4.372 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m2.865 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m5.699 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m5.186 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m2.474 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m3.516 ms - 1145[0m
+[0mGET /clbkncs/app.js [33m404 [0m6.701 ms - 1145[0m

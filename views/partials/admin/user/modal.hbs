@@ -1,0 +1,260 @@
+<div class="modal fade" id="create_user" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mới thành viên</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_CreateUser" id="formCreateUser" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formCreate.name" name="name" class="form-control" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formCreate.address" name="address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formCreate.phone" name="phone" class="form-control" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Vị trí</label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formCreate.position"  name="position" class="form-control" placeholder="Vị trí">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy"
+                                data-date-viewmode="years" data-date-today-highlight="true">
+                                <input type="text" class="form-control dashed-border" 
+                                    ng-model="formCreate.birthday" name="birthday"
+                                    placeholder="Ngày sinh">
+                                <div class="form-control-focus"> </div>
+                                <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="create(f_CreateUser)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_user" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật thành viên</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_UpdateUser" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.name" name="name" class="form-control" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.address" name="address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.phone" name="phone" class="form-control" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Vị trí</label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="formUpdate.position"  name="position" class="form-control" placeholder="Vị trí">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy"
+                                data-date-viewmode="years" data-date-today-highlight="true">
+                                <input type="text" class="form-control dashed-border" 
+                                    ng-model="formUpdate.birthday" name="birthday"
+                                    placeholder="Ngày sinh">
+                                <div class="form-control-focus"> </div>
+                                <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="update(f_UpdateUser)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- account --}}
+<div class="modal fade" id="create_account" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mới tài khoản</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_CreateAccount" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên tài khoản <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" name="username" ng-model="formCreateAccount.username" class="form-control" placeholder="Tên tài khoản">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Mật khẩu <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password" id="password" ng-model="formCreateAccount.password" class="form-control" placeholder="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nhập lại mật khẩu <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="password" name="repassword" ng-model="formCreateAccount.repassword" class="form-control" placeholder="Nhập lại mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" ng-model="formCreateAccount.name" class="form-control" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Vị trí <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                             <select class="form-control" name="role" placeholder="Vị trí" ng-model="formCreateAccount.position" ng-options="role as role for role in roles" >
+                                <option value="" ng-if="hideOption"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text"name="address" ng-model="formCreateAccount.address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" name="phone" ng-model="formCreateAccount.phone" class="form-control" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy"
+                                data-date-viewmode="years" data-date-today-highlight="true">
+                                <input type="text" class="form-control dashed-border" 
+                                    ng-model="formCreateAccount.birthday" 
+                                    placeholder="Ngày sinh" name="birthday">
+                                <div class="form-control-focus"> </div>
+                                <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="createAccount(f_CreateAccount)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_account" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật tài khoản</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="f_UpdateAccount" ng-validate="validator">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên tài khoản <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly ng-model="formUpdateAccount.username" class="form-control" placeholder="Tên tài khoản">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" ng-model="formUpdateAccount.name" class="form-control" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Vị trí <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                             <select class="form-control" name="role" placeholder="Vị trí" ng-model="formUpdateAccount.position" ng-options="role as role for role in roles" >
+                                <option value="" ng-if="hideOption"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text"name="address" ng-model="formUpdateAccount.address" class="form-control" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại <span class="required">(*)</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" name="phone" ng-model="formUpdateAccount.phone" class="form-control" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy"
+                                data-date-viewmode="years" data-date-today-highlight="true">
+                                <input type="text" class="form-control dashed-border" 
+                                    ng-model="formUpdateAccount.birthday" 
+                                    placeholder="Ngày sinh" name="birthday">
+                                <div class="form-control-focus"> </div>
+                                <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" ng-click="updateAccount(f_UpdateAccount)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container-fluid p-content-wr" ng-controller="EditPostController" data-ng-init="infoPost = {{data}}; getInfo()">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Chi tiết bài viết </h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="card-title ">
+                <div class="flex flex-end">
+                    <button type="button" class="btn btn-success mr-1" ng-click="update(f_UpdatePost)">
+                        Lưu
+                    </button>
+                    <a href="/admin/post" class="btn btn-primary">Danh sách</a>
+                </div>
+            </div>
+            <form name="f_UpdatePost" ng-validate="validator">
+                <div class="form-group">
+                    <label>Tên danh mục bài viết <span class="required">(*)</span> </label>
+                    <div>
+                        <div class="input-group mb-2">
+                            <select name="category_post" ng-model="formUpdatePost.category_post_id" 
+                                ng-options="category.id as category.category_name for category in categoryPosts"
+                                name="category_post" placeholder="Danh mục" class="form-control">
+                                <option value="" ng-if="hideOptions"></option>
+                            </select>
+                            <div class="input-group-prepend">
+                                <button type="button" data-target="#create_category" data-toggle="modal" 
+                                    class="btn btn-success bd-rd-tr bd-rd-br">Thêm mới</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- <input type="text" name="category_post" class="form-control"> --}}
+                </div>
+                <div class="form-group">
+                    <label>Tiêu đề <span class="required">(*)</span> </label>
+                    <textarea name="title" ng-model="formUpdatePost.title" id="title" rows="2" placeholder="..." class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label> Ảnh đại diện </label>
+                    <div class="wrapper-file-input flex">
+                        <input type="file" file-upload-model="avatar" class="custom-file-input" id="logo">
+                        <button class="btn btn-success btn-choose-file mr-5">Chọn ảnh</button>
+                        <div class="image-wrapper-input avatar-profile">
+                            <img src="/images/avatar.jpg" alt="" srcset="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung <span class="required">(*)</span> </label>
+                    <textarea name="content" id="content_post" rows="2" placeholder="Nội dung"
+                        class="form-control"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- modal -->
+
+    {{> admin/posts/modal}}
+</div>

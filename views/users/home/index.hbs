@@ -1,0 +1,113 @@
+<div class="page-content" id="page-home" ng-controller="HomeController">
+    <header> 
+        <img ng-src="\{{info.avatar}}" class="img-home"  alt="">
+    </header>
+    <div class="divider mb-5"></div>
+    <main class="container-fluid">
+        <div class="ct-page">
+            <div class="info-clb box">
+                <div class="mb-title text-center">
+                    <h3 class="font-weight-bold text-uppercase">
+                        câu lạc bộ kỹ năng cuộc sống
+                    </h3>
+                </div>
+                <div class="i-content d-flex flex-wrap">
+                    <div class="i-b fl-1 text-center mgr-10 p-4 mt-2 flex justify-content-center">
+                        <div class="wr-ct logo-pro">
+                            <img >
+                            <div class="i-b-title text-uppercase mt-2">
+                                Slogan
+                            </div>
+                            <div class="i-b-content" ng-bind="info.slogan || 'Vui vẻ nhiệt tình'"></div>
+                        </div>
+                    </div>
+                    <div class="i-b fl-1 text-center p-4 mt-2 mgr-10 flex justify-content-center">
+                        <div class="wr-ct logo-pro">
+                            <img>
+                            <div class="i-b-title text-uppercase mt-2">
+                                lĩnh vực hoạt động
+                            </div>
+                            <div class="i-b-content" ng-bind="info.field_of_activity || 'nguồn nhân lực'"></div>
+                        </div>
+                    </div>
+                    <div class="i-b fl-1 text-center p-4 mt-2 flex justify-content-center">
+                        <div class="wr-ct logo-pro">
+                            <img >
+                            <div class="i-b-title text-uppercase mt-2">
+                                quy mô
+                            </div>
+                            <div class="i-b-content" ng-bind="info.scales || 'Trên 120 thành viên 5 ban chuyên môn'"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="divider mb-5"></div>
+            <div class="activity-clb box">
+                <div class="at-title text-center">
+                    <h3 class="font-weight-bold text-uppercase">
+                        Thông tin chung về hoạt động câu lạc bộ kỹ năng cuộc sống
+                    </h3>
+                </div>
+                <div class="ac-content d-flex flex-wrap">
+                    <div class="ac-b fl-1 text-center mgr-10 mt-2 flex justify-content-center">
+                        <div class="wr-ct">
+                            <img src="/images/store/paris.jpg" alt="">
+                            <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder">
+                                Tổ chức sự kiện: you can, tuyệt đỉnh sv
+                            </div>
+                            <div class="ac-b-content">
+                                You can - cuộc thi tìm kiếm tài năng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ac-b fl-1 text-center mt-2 mgr-10 flex justify-content-center">
+                        <div class="wr-ct">
+                            <img src="/images/store/paris.jpg" alt="">
+                            <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder">
+                                hội thảo traning kỹ năng mềm
+                            </div>
+                            <div class="ac-b-content">
+                                Kỹ năng mềm, tiếng anh, kế toán-kiểm toán
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ac-b fl-1 text-center mt-2 flex justify-content-center">
+                        <div class="wr-ct">
+                            <img src="/images/store/paris.jpg" alt="">
+                            <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder">
+                                hoạt động vui chơi ngoại khóa
+                            </div>
+                            <div class="ac-b-content">
+                                Hoạt động tình nguyện: Trao tặng bánh cho người vô gia cư
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider mb-5"></div>
+            <div class="member-clb box">
+                <div class="mb-title text-center">
+                    <h3 class="font-weight-bold text-uppercase">
+                        Thành viên câu lạc bộ
+                    </h3>
+                </div>
+                <div class="mb-content d-flex flex-wrap">
+                    <div class="mb-b fl-1 text-center mgr-10 mt-2 flex justify-content-center" ng-repeat="item in members">
+                        <div class="wr-ct">
+                            <img ng-src="\{{item.avatar}}" alt="">
+                            <div class="mb-b-title text-uppercase mgt-20 font-weight-bolder" ng-bind="item.name">
+                            </div>
+                            <div class="mb-b-content" ng-bind="item.position">
+                            </div>
+                            <div class="mb-b-social">
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-facebook-square"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <div class="divider mb-5"></div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container-fluid" ng-controller="DepartmentController">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách ban ngành</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="card-title">
+                <a href="/admin/department/add"  class="btn btn-success" >
+                    Thêm mới
+                </a>
+                <button type="button" class="btn btn-primary">Tải lại</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên ban ngành</th>
+                            <th>Tiêu đề</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in departments">
+                            <td ng-bind="item.name"></td>
+                            <td ng-bind="item.title"></td>
+                            <td ng-bind="item.created_date | formatDateToDMY"></td>
+                            <td ng-bind="item.status | filterStatusToText"></td>
+                            <td>
+                                <div class="btn-group  btn-group-sm" role="group" >
+                                    <button type="button" class="btn" ng-click="info(item.id)" >
+                                        <i class="fas fa-pen-alt"></i>
+                                    </button>
+                                    <button type="button" class="btn" ng-click="deleteDepartment(item.id, item.name)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal -->
+</div>

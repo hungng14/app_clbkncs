@@ -1,0 +1,2 @@
+server is running at port \\.\pipe\47665062-1901-4d04-988d-6ae5b87b6841
+[0mGET /clbkncs/app.js [33m404 [0m64.557 ms - 1197[0m
