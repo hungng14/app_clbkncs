@@ -46,6 +46,13 @@ a{
     text-shadow: 1px 1px 2px rgb(252, 168, 73);
 }
 
+@media only screen and (max-width: 600px) {
+    .ac-content.d-flex{
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
 .mb-b{
     height: 400px;
 }
@@ -75,6 +82,7 @@ a{
     flex: 1;
     text-align: center;
 }
+
 
 @media only screen and (max-width: 400px) {
     .ct-box .img-wr-pro img{
@@ -133,4 +141,10 @@ a{
 
 .n-b-content a:hover{
     color: var(--hover-cl-grey-clb);
+}
+
+@media only screen and (max-width: 800px) {
+    h3{
+        font-size: 1.5rem;
+    }
 }

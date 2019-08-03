@@ -35,7 +35,31 @@ nav .navbar-brand img{
     height: 100vh;
     background-size: cover;
     background-position: center;
-    max-height: 550px;
+    max-height: 480px;
+}
+
+@media only screen and (max-width: 1000px) {
+    #page-home header{
+        max-height: 430px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #page-home header{
+        max-height: 380px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #page-home header{
+        max-height: 300px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #page-home header{
+        max-height: 200px;
+    }
 }
 
 #page-home header .img-home{
