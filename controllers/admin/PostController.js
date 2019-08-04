@@ -80,7 +80,10 @@ module.exports = {
         try {
             const select = `posts.id, posts.title, posts.category_post_id, posts.created_date, 
             posts.status, category_posts.category_name`;
-            const where = 'posts.status != 4 ORDER BY posts.created_date  DESC';
+            const where = `posts.status != 4  
+                            ORDER BY posts.created_date DESC 
+                            OFFSET 5 ROWS
+                            FETCH NEXT 5 ROW ONLY`;
             const join = 'category_posts ON  posts.category_post_id = category_posts.id';
             const sql = getDataJoinWhere('posts', select, 'INNER', join, where);
             await executeSql(sql, (data, err) => {

@@ -7,6 +7,7 @@
        
         $scope.list = () => {
             PostService.list().then((response) => {
+                console.log(response)
                 if (response.Success) {
                     $scope.posts = response.Data || [];
                 } else {
