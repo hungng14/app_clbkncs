@@ -1,0 +1,63 @@
+.form-group.has-error .form-control{
+    border: 1px solid #f31b1b;
+}
+
+.form-group.has-success .form-control{
+    border: 1px solid #00c311 ;
+}
+
+.bd-success{
+    border: 1px solid #00c311 !important;
+}
+
+.bd-error{
+    border: 1px solid #f31b1b !important;;
+}
+
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.flex{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.bd-rd-tr{
+    border-top-right-radius: .35rem !important;
+}
+.bd-rd-br{
+    border-bottom-right-radius: .35rem !important;
+}
+
+.image-wrapper-input{
+    height: 100px;
+    width: 100px
+}
+
+.image-wrapper-input img{
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper-file-input input.custom-file-input{
+    width: 96px;
+    line-height: 1.5;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+.wrapper-file-input.flex .btn-choose-file{
+    height: 37px;
+}
+
+.p-content-wr{
+    display: none;
+}
