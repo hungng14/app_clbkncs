@@ -27,7 +27,7 @@
                 if (!isEmpty($scope.formInfoClub.founder_profile)) {
                     $scope.formInfoClub.founderProfileOld = $scope.formInfoClub.founder_profile;
                     let urlFounderProfile = $scope.formInfoClub.founderProfileOld;
-                    delete $scope.formInfoClub.avatar;
+                    delete $scope.formInfoClub.founder_profile;
                     angular.element('.founder-profile').find('img').attr('src', (urlFounderProfile || '/images/profile.png'))
                 }
             })

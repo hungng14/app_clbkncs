@@ -95,7 +95,7 @@
                     'POST',
                     '/admin/user/update',
                     files,
-                    $scope.formCreate,
+                    $scope.formUpdate,
                 ).then((response) => {
                     if (response.Success) {
                         logger.success('Cập nhật thành công');

@@ -41,7 +41,8 @@ module.exports = {
         try {
             const select = `info_club.id, info_club.slogan, info_club.address, info_club.phone, 
             info_club.scales, info_club.user_id, info_club.avatar, info_club.logo, info_club.field_of_activity, 
-            info_club.founder_profile, info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
+            info_club.founder_profile, info_club.founder, info_club.work_start_time,
+            info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';
             const join = 'users ON  info_club.user_id = users.id';
             const sql = getDataJoinWhere('info_club', select, 'INNER', join, where);
@@ -88,7 +89,8 @@ module.exports = {
                             work_end_time = N'${params.work_end_time || ''}', 
                             field_of_activity = N'${params.field_of_activity || ''}', 
                             updated_date = N'${daycurrent}', 
-                            updated_by = ${userDecoded.id || '0'}`;
+                            updated_by = ${userDecoded.id || '0'},
+                            founder = N'${params.founder}'`;
                 if (!isEmpty(params.avatar)) {
                     values += `,avatar = N'${params.avatar || ''}'`;
                 }
@@ -137,7 +139,7 @@ module.exports = {
         try {
             const select = `info_club.slogan, info_club.address, info_club.phone, 
             info_club.scales, info_club.avatar, info_club.logo, info_club.field_of_activity, 
-            info_club.founder_profile, info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
+            info_club.founder_profile, info_club.founder, info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';
             const join = 'users ON  info_club.user_id = users.id';
             const sql = getDataJoinWhere('info_club', select, 'INNER', join, where);
