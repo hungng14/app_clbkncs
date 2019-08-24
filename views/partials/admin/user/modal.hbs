@@ -46,6 +46,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"> Ảnh đại diện </label>
+                        <div class="col-sm-9">
+                            <div class="wrapper-file-input flex">
+                                <input type="file" file-upload-model="avatar" class="custom-file-input">
+                                <button class="btn btn-success btn-choose-file mr-5">Chọn ảnh</button>
+                                <div class="image-wrapper-input avatar-profile">
+                                    <img src="/images/profile.png" alt="" srcset="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -66,7 +78,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="f_UpdateUser" ng-validate="validator">
+                <form name="f_UpdateUser" id="formUpdatUser" ng-validate="validator">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Họ tên <span class="required">(*)</span></label>
                         <div class="col-sm-9">
@@ -101,6 +113,18 @@
                                     placeholder="Ngày sinh">
                                 <div class="form-control-focus"> </div>
                                 <span class="input-group-addon"><i class="far fa-calendar-alt font-blue"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"> Ảnh đại diện </label>
+                        <div class="col-sm-9">
+                            <div class="wrapper-file-input flex">
+                                <input type="file" file-upload-model="avatarUpdate" class="custom-file-input" >
+                                <button class="btn btn-success btn-choose-file mr-5">Chọn ảnh</button>
+                                <div class="image-wrapper-input avatar-profile">
+                                    <img src="/images/profile.png" alt="" srcset="">
+                                </div>
                             </div>
                         </div>
                     </div>

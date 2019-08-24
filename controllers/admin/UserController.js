@@ -12,6 +12,13 @@ const {
     isEmpty,
     checkParamsValid,
     getInfoUserDecoded,
+    uploadFiles,
+    storage,
+    fileFilterImage,
+    beforeUpload,
+    sliceString,
+    joinPath,
+    deleteFile,
 } = require('./../../libs/shared');
 const {
     insertInto, getDataWhere, getDataJoin, updateSet, getDataJoinWhere, removeRecord,
@@ -25,6 +32,8 @@ const {
     idValidator, createValidator, createAccountValidator,
     updateValidator, updateAccountValidator, accountIdValidator,
 } = require('../../validator/UserValidator');
+
+const uploadImage = uploadFiles(storage('users', 'images'), fileFilterImage, 'File');
 
 module.exports = {
     index: async (req, res) => { // eslint-disable-line
@@ -73,7 +82,7 @@ module.exports = {
             if (errors) {
                 return res.json(responseError(1002, errors));
             }
-            const select = 'id, name, address, position, phone, birthday, status';
+            const select = 'id, avatar, name, address, position, phone, birthday, status';
             const where = `id=${req.query.id}`;
             const sql = getDataWhere('users', select, where);
             await executeSql(sql, (data, err) => {
@@ -86,63 +95,87 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            req.checkBody(createValidator);
-            const errors = req.validationErrors();
-            if (errors) {
-                return res.json(responseError(1002, errors));
-            }
-            const params = req.body;
-            if (!checkParamsValid(params)) {
-                return res.json(responseError(4004));
-            }
-            const userDecoded = getInfoUserDecoded(req.decoded);
-            const daycurrent = getDateYMDHMSCurrent();
-            const columns = 'name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
-            const values = `N'${params.name || ''}',
-                            N'${params.address || ''}',
-                            N'${params.avatar || '/images/profile.png'}',
-                            N'${params.position || ''}', 
-                            N'${params.phone || ''}', 
-                            N'${params.birthday || ''}',
-                            N'${TYPE_USER.MEMBER}',
-                            N'${daycurrent}',
-                            ${userDecoded.id || '0'}, 
-                            1`;
-            const strSql = insertInto('users', columns, values);
-            await executeSql(strSql, (data, err) => {
-                if (err) { return res.json(responseError(4002, err)); }
-                return res.json(responseSuccess(2003));
-            });
+            beforeUpload(req, res, async () => {
+                req.checkBody(createValidator);
+                const errors = req.validationErrors();
+                if (errors) {
+                    return res.json(responseError(1002, errors));
+                }
+                const params = req.body;
+                if (!checkParamsValid(params)) {
+                    return res.json(responseError(4004));
+                }
+                if (!isEmpty(req.files)) {
+                    req.files.map((file) => {
+                        const stringPath = file.path.split('\\').join('/');
+                        params[file.fieldname] = sliceString(stringPath, '/uploads');
+                    });
+                }
+                const userDecoded = getInfoUserDecoded(req.decoded);
+                const daycurrent = getDateYMDHMSCurrent();
+                const columns = 'name, address, avatar, position, phone, birthday, type, created_date, created_by, status';
+                const values = `N'${params.name || ''}',
+                                N'${params.address || ''}',
+                                N'${params.avatar || '/images/profile.png'}',
+                                N'${params.position || ''}', 
+                                N'${params.phone || ''}', 
+                                N'${params.birthday || ''}',
+                                N'${TYPE_USER.MEMBER}',
+                                N'${daycurrent}',
+                                ${userDecoded.id || '0'}, 
+                                1`;
+                const strSql = insertInto('users', columns, values);
+                await executeSql(strSql, (data, err) => {
+                    if (err) { return res.json(responseError(4002, err)); }
+                    return res.json(responseSuccess(2003));
+                });
+            }, uploadImage);
         } catch (error) {
             return res.json(responseError(1003, error));
         }
     },
     update: async (req, res) => {
         try {
-            req.checkBody(updateValidator);
-            const errors = req.validationErrors();
-            if (errors) {
-                return res.json(responseError(1002, errors));
-            }
-            const params = req.body;
-            if (!checkParamsValid(params)) {
-                return res.json(responseError(4004));
-            }
-            const userDecoded = getInfoUserDecoded(req.decoded);
-            const daycurrent = getDateYMDHMSCurrent();
-            const values = `name = N'${params.name || ''}',
-            address = N'${params.address || ''}', 
-            position = N'${params.position || ''}', 
-            phone = N'${params.phone || ''}', 
-            birthday = N'${params.birthday || ''}',
-            updated_date = N'${daycurrent}', 
-            updated_by = ${userDecoded.id || '0'}`;
-            const where = `id = ${params.id}`;
-            const strSql = updateSet('users', values, where);
-            await executeSql(strSql, (data, err) => {
-                if (err) { return res.json(responseError(4002, err)); }
-                return res.json(responseSuccess(2004));
-            });
+            beforeUpload(req, res, async () => {
+                req.checkBody(updateValidator);
+                const errors = req.validationErrors();
+                if (errors) {
+                    return res.json(responseError(1002, errors));
+                }
+                const params = req.body;
+                if (!checkParamsValid(params)) {
+                    return res.json(responseError(4004));
+                }
+                const avatarOld = params.avatarOld;
+                if (!isEmpty(req.files)) {
+                    req.files.map((file) => {
+                        const stringPath = file.path.split('\\').join('/');
+                        params[file.fieldname] = sliceString(stringPath, '/uploads');
+                    });
+                }
+                const userDecoded = getInfoUserDecoded(req.decoded);
+                const daycurrent = getDateYMDHMSCurrent();
+                let values = `name = N'${params.name || ''}',
+                                address = N'${params.address || ''}', 
+                                position = N'${params.position || ''}', 
+                                phone = N'${params.phone || ''}', 
+                                birthday = N'${params.birthday || ''}',
+                                updated_date = N'${daycurrent}', 
+                                updated_by = ${userDecoded.id || '0'}`;
+                if (!isEmpty(params.avatar)) {
+                    values += `,avatar = N'${params.avatar}'`;
+                }
+                const where = `id = ${params.id}`;
+                const strSql = updateSet('users', values, where);
+                await executeSql(strSql, (data, err) => {
+                    if (err) { return res.json(responseError(4002, err)); }
+                    if (!isEmpty(params.avatar)) {
+                        const filePath = joinPath(`../public${avatarOld}`);
+                        deleteFile(filePath);
+                    }
+                    return res.json(responseSuccess(2004));
+                });
+            }, uploadImage);
         } catch (error) {
             return res.json(responseError(1003, error));
         }

@@ -71,6 +71,15 @@ a{
     border: 1px solid #eee; 
 }
 
+.mb-b .wr-ct img{
+    height: 200px;
+    width: 200px;
+}
+
+.mb-b .wr-ct .mb-b-content{
+    max-width: 200px;
+}
+
 .box{
     border: 1px solid #eee;  
     padding: 20px;

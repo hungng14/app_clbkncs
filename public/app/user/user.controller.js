@@ -1,9 +1,9 @@
 (function () {
     angular.module('CLBKNCS')
         .controller('UserController', UserController);
-        UserController.$inject = ['$scope', 'UserService', 'ValidatorUser', 'PaginationFactory', 'logger', 'limitData', 'SharedService'];
+        UserController.$inject = ['$scope', 'UserService', 'ValidatorUser', 'PaginationFactory', 'logger', 'limitData', 'SharedService', 'UploadService'];
 
-    function UserController($scope, UserService, ValidatorUser, PaginationFactory, logger, limitData, SharedService) {
+    function UserController($scope, UserService, ValidatorUser, PaginationFactory, logger, limitData, SharedService, UploadService) {
         $scope.validator = ValidatorUser.validationOptions();
         $scope.listRole = () => {
             UserService.listRole().then((response) => {
@@ -27,13 +27,22 @@
 
         $scope.formCreate = {};
         $scope.create = (form) => {
+            const files = {};
+            if (!SharedService.isEmpty($scope.avatar)) {
+                files.avatar = $scope.avatar;
+            }
             if (form.validate()) {
-                UserService.create($scope.formCreate).then((response) => {
+                UploadService.uploadFiles(
+                    'POST',
+                    '/admin/user/create',
+                    files,
+                    $scope.formCreate,
+                ).then((response) => {
                     if (response.Success) {
                         logger.success('Thêm thành công');
-                        $scope.list();
                         resetFormCreate();
                         changeCss();
+                        $scope.list();
                     } else {
                         logger.error(getResponseMsg(response));
                     }
@@ -45,6 +54,7 @@
 
         function resetFormCreate() {
             $scope.formCreate = {};
+            angular.element('#formCreateUser .avatar-profile').find('img').attr('src', ('/images/profile.png'))
         }
 
         function filterObject(obj = {}) {
@@ -63,6 +73,12 @@
                 if (response.Success) {
                     const user = response.Data;
                     $scope.formUpdate = filterObject(user);
+                    if (!SharedService.isEmpty($scope.formUpdate.avatar)) {
+                        $scope.formUpdate.avatarOld = $scope.formUpdate.avatar;
+                        let urlAvatar = $scope.formUpdate.avatarOld;
+                        delete $scope.formUpdate.avatar;
+                        angular.element('#formUpdatUser .avatar-profile').find('img').attr('src', (urlAvatar || '/images/profile.jpg'))
+                    }
                     return;
                 }
                 $scope.formUpdate = {};
@@ -70,8 +86,17 @@
         }
 
         $scope.update = (form) => {
+            const files = {};
+            if (!SharedService.isEmpty($scope.avatarUpdate)) {
+                files.avatar = $scope.avatarUpdate;
+            }
             if (form.validate()) {
-                UserService.update($scope.formUpdate).then((response) => {
+                UploadService.uploadFiles(
+                    'POST',
+                    '/admin/user/update',
+                    files,
+                    $scope.formCreate,
+                ).then((response) => {
                     if (response.Success) {
                         logger.success('Cập nhật thành công');
                         $scope.list();

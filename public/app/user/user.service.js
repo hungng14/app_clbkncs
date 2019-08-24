@@ -14,10 +14,6 @@
             return HttpService.sendData('GET', '/admin/user/getInfo', data, 'Lỗi xảy khi hiển thị thông tin thành viên');
         };
 
-        this.create = (data) => {
-            return HttpService.sendData('POST', '/admin/user/create', data, 'Lỗi xảy khi thêm mới thành viên');
-        };
-
         this.update = (data) => {
             return HttpService.sendData('POST', '/admin/user/update', data, 'Lỗi xảy khi cập nhật thành viên');
         };
