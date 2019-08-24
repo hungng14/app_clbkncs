@@ -1,28 +1,32 @@
 <nav class="navbar navbar-expand-md navbar-light shadow bg-white sticky-top">
   <a class="navbar-brand logo-page" style="width: 50px; height: 50px;" href="/">
-      <img src="/images/logo.jpg" alt="">
+    <img src="/images/logo.jpg" alt="">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav  ml-auto">
-      <li class="nav-item ">
-            <a href="/" class="nav-link {{#active 'class' activity 'Home'}}{{/active}}">Trang chủ</a>
-        </li>
-        <li class="nav-item">
-            <a href="/news" class="nav-link {{#active 'class' activity 'News'}}{{/active}}">Tin tức</a>
-        </li>
-        <li class="nav-item">
-            <a href="/activity-clb" class="nav-link  {{#active 'class' activity 'ActivityClb'}}{{/active}}">Hoạt động Clb</a>
-        </li>
-        <li class="nav-item">
-            <a href="/members" class="nav-link {{#active 'class' activity 'Members'}}{{/active}}">Thành viên Clb</a>
-        </li>
-        <li class="nav-item">
-            <a href="/about-us" class="nav-link {{#active 'class' activity 'About'}}{{/active}}">Giới thiệu</a>
-        </li>
+      <li class="nav-item">
+        <a href="/" class="nav-link text-uppercase {{#active 'class' activity 'Home'}}{{/active}}">Trang chủ</a>
+      </li>
+      <li class="nav-item">
+        <a href="/about-us" class="nav-link text-uppercase {{#active 'class' activity 'About'}}{{/active}}">Giới
+          thiệu</a>
+      </li>
+      <li class="nav-item">
+        <a href="/activity-clb"
+          class="nav-link text-uppercase  {{#active 'class' activity 'ActivityClb'}}{{/active}}">Hoạt động Clb</a>
+      </li>
+      <li class="nav-item">
+        <a href="/members" class="nav-link text-uppercase {{#active 'class' activity 'Members'}}{{/active}}">Thành viên
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/news" class="nav-link text-uppercase {{#active 'class' activity 'News'}}{{/active}}">Tin tức</a>
+      </li>
     </ul>
   </div>
 </nav>

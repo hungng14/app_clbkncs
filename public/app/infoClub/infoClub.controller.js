@@ -24,6 +24,12 @@
                     delete $scope.formInfoClub.avatar;
                     angular.element('.avatar-profile').find('img').attr('src', (urlAvatar || '/images/avatar.jpg'))
                 }
+                if (!isEmpty($scope.formInfoClub.founder_profile)) {
+                    $scope.formInfoClub.founderProfileOld = $scope.formInfoClub.founder_profile;
+                    let urlFounderProfile = $scope.formInfoClub.founderProfileOld;
+                    delete $scope.formInfoClub.avatar;
+                    angular.element('.founder-profile').find('img').attr('src', (urlFounderProfile || '/images/profile.png'))
+                }
             })
         }
 
@@ -40,6 +46,9 @@
             }
             if (!isEmpty($scope.logo)) {
                 files.logo = $scope.logo;
+            }
+            if (!isEmpty($scope.founder_profile)) {
+                files.founder_profile = $scope.founder_profile;
             }
             const work_start_time = $("#start_time").find('input').val();
             const work_end_time = $("#end_time").find('input').val();

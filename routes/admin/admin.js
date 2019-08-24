@@ -43,4 +43,8 @@ require('./DepartmentRoute')(admin);
 /* upload files */
 require('./UploadFileRoute')(admin);
 
+/* activity clb */
+require('./ActivityClbRoute')(admin);
+
+
 module.exports = admin;

@@ -32,10 +32,10 @@ module.exports = {
     index: async (req, res) => { // eslint-disable-line
         try {
             const info = getInfoUserDecoded(req.decoded);
-            res.render('admin/post/index', {
-                layout: 'post',
+            res.render('admin/adm_activity_clb/index', {
+                layout: 'adm_activity_clb',
                 title: TITLE_ADMIN,
-                activity: 'Post',
+                activity: 'ActivityClb',
                 info,
             });
         } catch (err) {
@@ -45,10 +45,10 @@ module.exports = {
     add: async (req, res) => { // eslint-disable-line
         try {
             const info = getInfoUserDecoded(req.decoded);
-            res.render('admin/post/add', {
-                layout: 'add_post',
+            res.render('admin/adm_activity_clb/add', {
+                layout: 'adm_activity_clb_add',
                 title: TITLE_ADMIN,
-                activity: 'Post',
+                activity: 'ActivityClb',
                 info,
             });
         } catch (err) {
@@ -63,10 +63,10 @@ module.exports = {
             const infoPost = await getInfo(id);
             const data = JSON.stringify(infoPost);
             if (!isEmpty(infoPost)) {
-                return res.render('admin/post/edit', {
-                    layout: 'edit_post',
+                return res.render('admin/adm_activity_clb/edit', {
+                    layout: 'adm_activity_clb_edit',
                     title: TITLE_ADMIN,
-                    activity: 'Post',
+                    activity: 'ActivityClb',
                     data,
                     info,
                 });
@@ -81,7 +81,7 @@ module.exports = {
             const page = req.query.page ? +req.query.page : 1;
             const limit = req.query.limit ? +req.query.limit : 10;
             const skip = (page - 1) * limit;
-            const sqlTotalRecords = getDataWhere('posts', 'COUNT(*) AS totalRecords', `posts.type = N'${TYPE_POST.NEWS}' AND posts.status != 4`);
+            const sqlTotalRecords = getDataWhere('posts', 'COUNT(*) AS totalRecords', `posts.type = N'${TYPE_POST.ACTIVITY_CLB}' AND posts.status != 4`);
             const totalRecords = await new Promise((resolve) => {
                 executeSql(sqlTotalRecords, (data, err) => {
                     if (err) { resolve(0); }
@@ -90,8 +90,8 @@ module.exports = {
             });
             const select = `posts.id, posts.title, posts.category_post_id, posts.created_date, 
             posts.status, category_posts.category_name`;
-            const where = `posts.type = N'${TYPE_POST.NEWS}' AND posts.status != 4  
-                            ORDER BY posts.created_date DESC 
+            const where = `posts.type = N'${TYPE_POST.ACTIVITY_CLB}' AND posts.status != 4 
+                            ORDER BY posts.created_date DESC
                             OFFSET ${skip} ROWS
                             FETCH NEXT ${limit} ROWS ONLY`;
             const join = 'category_posts ON  posts.category_post_id = category_posts.id';
@@ -99,6 +99,7 @@ module.exports = {
             await executeSql(sql, (data, err) => {
                 if (err) { return res.json(responseError(4000, err)); }
                 const response = {};
+                console.log(data);
                 response.docs = data.recordset;
                 response.limit = limit;
                 response.total = totalRecords;
@@ -152,7 +153,7 @@ module.exports = {
                                 N'${daycurrent}',
                                 ${userDecoded.id || '0'}, 
                                 1,
-                                N'${TYPE_POST.NEWS}'`;
+                                N'${TYPE_POST.ACTIVITY_CLB}'`;
                 if (!isEmpty(params.avatar)) {
                     columns += ',avatar';
                     values += `,N'${params.avatar || ''}'`;
@@ -293,7 +294,7 @@ module.exports = {
             const page = req.query.page ? +req.query.page : 1;
             const limit = req.query.limit ? +req.query.limit : 10;
             const skip = (page - 1) * limit;
-            const sqlTotalRecords = getDataWhere('posts', 'COUNT(*) AS totalRecords', `posts.type = N'${TYPE_POST.NEWS}' AND posts.status != 4`);
+            const sqlTotalRecords = getDataWhere('posts', 'COUNT(*) AS totalRecords', `posts.type = N'${TYPE_POST.ACTIVITY_CLB}' AND posts.status != 4`);
             const totalRecords = await new Promise((resolve) => {
                 executeSql(sqlTotalRecords, (data, err) => {
                     if (err) { resolve(0); }
@@ -302,7 +303,7 @@ module.exports = {
             });
             const select = `posts.id, posts.title, posts.category_post_id, posts.published_date, 
             posts.created_date, posts.avatar, category_posts.category_name`;
-            const where = `posts.type = N'${TYPE_POST.NEWS}' AND posts.status = 1
+            const where = `posts.type = N'${TYPE_POST.ACTIVITY_CLB}' AND posts.status = 1 
                             ORDER BY posts.created_date DESC
                             OFFSET ${skip} ROWS
                             FETCH NEXT ${limit} ROWS ONLY`;

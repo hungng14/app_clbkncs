@@ -41,7 +41,7 @@ module.exports = {
         try {
             const select = `info_club.id, info_club.slogan, info_club.address, info_club.phone, 
             info_club.scales, info_club.user_id, info_club.avatar, info_club.logo, info_club.field_of_activity, 
-            info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
+            info_club.founder_profile, info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';
             const join = 'users ON  info_club.user_id = users.id';
             const sql = getDataJoinWhere('info_club', select, 'INNER', join, where);
@@ -70,6 +70,7 @@ module.exports = {
                 const params = req.body;
                 const avatarOld = params.avatarOld;
                 const logoOld = params.logoOld;
+                const founderProfileOld = params.founderProfileOld;
                 if (!isEmpty(req.files)) {
                     req.files.map((file) => {
                         const stringPath = file.path.split('\\').join('/');
@@ -94,6 +95,9 @@ module.exports = {
                 if (!isEmpty(params.logo)) {
                     values += `,logo = N'${params.logo || ''}'`;
                 }
+                if (!isEmpty(params.founder_profile)) {
+                    values += `,founder_profile = N'${params.founder_profile || ''}'`;
+                }
                 const where = `id = ${params.id}`;
                 const strSql = updateSet('info_club', values, where);
                 await executeSql(strSql, (data, err) => {
@@ -113,6 +117,10 @@ module.exports = {
                         const filePath = joinPath(`../public${logoOld}`);
                         deleteFile(filePath);
                     }
+                    if (!isEmpty(params.founder_profile)) {
+                        const filePath = joinPath(`../public${founderProfileOld}`);
+                        deleteFile(filePath);
+                    }
                     return res.json(responseSuccess(2004));
                 });
             }, uploadImage);
@@ -129,7 +137,7 @@ module.exports = {
         try {
             const select = `info_club.slogan, info_club.address, info_club.phone, 
             info_club.scales, info_club.avatar, info_club.logo, info_club.field_of_activity, 
-            info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
+            info_club.founder_profile, info_club.work_start_time, info_club.work_end_time, info_club.email, users.name`;
             const where = 'info_club.status !=4';
             const join = 'users ON  info_club.user_id = users.id';
             const sql = getDataJoinWhere('info_club', select, 'INNER', join, where);

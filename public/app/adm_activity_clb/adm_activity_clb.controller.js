@@ -1,9 +1,9 @@
 (function () {
     angular.module('CLBKNCS')
-        .controller('PostController', PostController);
-        PostController.$inject = ['$scope', 'PostService', 'PaginationFactory', 'logger', 'limitData', 'SharedService'];
+        .controller('ActivityClbController', ActivityClbController);
+        ActivityClbController.$inject = ['$scope', 'ActivityClbService', 'PaginationFactory', 'logger', 'limitData', 'SharedService'];
 
-    function PostController($scope, PostService, PaginationFactory, logger, limitData, SharedService) {
+    function ActivityClbController($scope, ActivityClbService, PaginationFactory, logger, limitData, SharedService) {
        
         $scope.limitData = limitData();
         $scope.paginate = {};
@@ -11,7 +11,7 @@
         $scope.paginate.limit = $scope.limitData[0];
         $scope.count = 1;
         $scope.list = () => {
-            PostService.list($scope.paginate).then((response) => {
+            ActivityClbService.list($scope.paginate).then((response) => {
                 if (response.Success) {
                     $scope.posts = response.Data.docs;
                     $scope.count = response.Data.page == 1 ? 1 : response.Data.limit * (response.Data.page - 1) + 1;
@@ -44,7 +44,7 @@
 
         $scope.deletePost = (id) => {
             function deletePost() {
-                PostService.delete({
+                ActivityClbService.delete({
                     id,
                 }).then((response) => {
                     if (response.Success) {

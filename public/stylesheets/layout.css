@@ -78,6 +78,25 @@ footer div.contact.flex div.f-info{
 .fl-1{
     flex: 1;
 }
+div.f-info{
+    position: relative;
+    min-width: 250px;
+    min-height: 200px;
+}
+div.f-info .w-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+div.founder .w-info img{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
 
 div.f-info i{
     transform: scale(1.5);
@@ -116,4 +135,6 @@ div.copyright{
         font-size: 1rem;
     }
 }
+
+
 

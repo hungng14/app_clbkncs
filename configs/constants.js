@@ -18,4 +18,9 @@ exports.TYPE_USER = {
     MEMBER: 'MEMBER',
 };
 
+exports.TYPE_POST = {
+    ACTIVITY_CLB: 'ACTIVITY_CLB',
+    NEWS: 'NEWS',
+};
+
 exports.URL = 'http://localhost:9614/';
