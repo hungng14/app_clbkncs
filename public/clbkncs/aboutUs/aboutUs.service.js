@@ -6,7 +6,7 @@
 
     function AboutUsService( HttpService) {
         this.listDepartment = (data) => {
-            return HttpService.sendData('GET', '/about-us/list-departments', data, 'Lỗi xảy khi hiển thị danh sách ban ngành');
+            return HttpService.sendData('GET', '/department/list-view', data, 'Lỗi xảy khi hiển thị danh sách ban ngành');
         };
     }
 })();

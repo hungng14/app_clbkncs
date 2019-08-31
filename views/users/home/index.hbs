@@ -50,18 +50,19 @@
                     </h3>
                 </div>
                 <div class="ac-content d-flex flex-wrap">
-                    <div class="ac-b fl-1 text-center mgr-10 mt-2 flex justify-content-center">
-                        <div class="wr-ct">
-                            <img src="/images/store/paris.jpg" alt="">
-                            <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder">
+                    <div ng-repeat="activity in activitiesClb"
+                        class="ac-b fl-1 text-center mgr-10 mt-2 flex justify-content-center">
+                        <div class="wr-ct c-pointer" ng-click="viewInfo(activity.id)">
+                            <img ng-src="/{{activity.avatar}}" alt="">
+                            <!-- <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder" >
                                 Tổ chức sự kiện: you can, tuyệt đỉnh sv
-                            </div>
-                            <div class="ac-b-content">
+                            </div> -->
+                            <div class="ac-b-content" ng-bind="activity.title">
                                 You can - cuộc thi tìm kiếm tài năng
                             </div>
                         </div>
                     </div>
-                    <div class="ac-b fl-1 text-center mt-2 mgr-10 flex justify-content-center">
+                    <!-- <div class="ac-b fl-1 text-center mt-2 mgr-10 flex justify-content-center">
                         <div class="wr-ct">
                             <img src="/images/store/paris.jpg" alt="">
                             <div class="ac-b-title text-uppercase mgt-20 font-weight-bolder">
@@ -82,7 +83,7 @@
                                 Hoạt động tình nguyện: Trao tặng bánh cho người vô gia cư
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="divider mb-5"></div>

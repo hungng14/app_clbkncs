@@ -11,7 +11,7 @@
                 <div class="hr mt-2"></div>
                 <div class="i-content d-flex flex-wrap">
                     <div class="i-b fl-1 text-center mgr-10 p-4 mt-2 flex justify-content-center">
-                        <div class="wr-ct">
+                        <div class="wr-ct logo-pro">
                             <img src="/images/store/paris.jpg" alt="">
                             <div class="i-b-title text-uppercase mt-2">
                                 Slogan
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="i-b fl-1 text-center p-4 mt-2 mgr-10 flex justify-content-center">
-                        <div class="wr-ct">
+                        <div class="wr-ct logo-pro">
                             <img src="/images/store/paris.jpg" alt="">
                             <div class="i-b-title text-uppercase mt-2">
                                 lĩnh vực hoạt động
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="i-b fl-1 text-center p-4 mt-2 flex justify-content-center">
-                        <div class="wr-ct">
+                        <div class="wr-ct logo-pro">
                             <img src="/images/store/paris.jpg" alt="">
                             <div class="i-b-title text-uppercase mt-2">
                                 quy mô
@@ -51,18 +51,15 @@
                     </h3>
                 </div>
                 <div class="hr mt-2"></div>
-                <div class="i-content">
-                    <div class="n-b p-4 mt-2 bd-1" ng-repeat="item in departments">
-                        <div class="ct-box ">
-                            <div class="ct-wr-in">
-                                <div class="n-b-title text-uppercase mt-2">
-                                    <div class="title-category text-center">
-                                        <h4 ng-bind="item.name">
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="n-b-content" compilehtml content="item.content">
-                                </div>
+                 <div class="i-content d-flex flex-wrap">
+                    <div ng-repeat="item in departments"
+                        class="i-b fl-1 text-center mgr-10 p-4 mt-2 flex justify-content-center">
+                        <div class="wr-ct c-pointer" ng-click="viewInfo(item.id)">
+                            <img src="/images/store/paris.jpg" alt="">
+                            <div class="i-b-title text-uppercase mt-2" ng-bind="item.name">
+                                Slogan
+                            </div>
+                            <div class="i-b-content" ng-bind="item.title">
                             </div>
                         </div>
                     </div>

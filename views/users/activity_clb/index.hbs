@@ -11,17 +11,22 @@
                 <div class="i-content">
                     <div class="n-b p-4 mt-2 bd-1" ng-repeat="item in listactivity">
                         <div class="ct-box ">
+                            <div class="img-wr-pro">
+                                <a href="/activity-clb/detail?id=\{{item.id}}">
+                                    <img ng-src="\{{item.avatar}}" alt="">
+                                </a>
+                            </div> 
                             <div class="ct-wr-in">
                                 <div class="n-b-title text-uppercase mt-2">
                                     <span class="type-n">
-                                        <a href="/news/detail?id=\{{item.id}}" ng-bind="item.category_name">
+                                        <a href="/activity-clb/detail?id=\{{item.id}}" ng-bind="item.category_name">
                                             Loại tin tức
                                         </a>
                                     </span>
                                     <span class="date-publised" ng-bind="item.created_date | formatDateToDMY"></span>
                                 </div>
                                 <div class="n-b-content">
-                                    <a href="/news/detail?id=\{{item.id}}" ng-bind="item.title">
+                                    <a href="/activity-clb/detail?id=\{{item.id}}" ng-bind="item.title">
                                     </a>
                                 </div>
                             </div>
@@ -29,7 +34,7 @@
                     </div>
                     <div class="hr mt-2"></div>
                 </div>
-                <div class="pagination-wr mt-1">
+                <div class="pagination-wr mt-1" ng-if="pagination.show">
                     <nav aria-label="navigation">
                         <ul class="pagination justify-content-center">
                             <li class="page-item">

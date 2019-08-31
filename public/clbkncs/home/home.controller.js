@@ -11,6 +11,14 @@
                 $scope.members = response.Success ? (response.Data || []): [];
             })
         }
-        Promise.all([$scope.listMembers()]).then(() => { });
+        $scope.listActivityClb = () => {
+            HomeService.listActivityClb().then((response) => {
+                $scope.activitiesClb = response.Success ? (response.Data || []): [];
+            })
+        }
+        $scope.viewInfo = (id) =>{
+            window.location.href = `/activity-clb/detail?id=${id}`;
+        }
+        Promise.all([$scope.listMembers(), $scope.listActivityClb()]).then(() => { });
     }
 })();

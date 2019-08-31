@@ -26,4 +26,7 @@ require('./InfoActivityClbRoute')(router);
 /* info club */
 require('./InfoClubRoute')(router);
 
+/* department */
+require('./DepartmentRoute')(router);
+
 module.exports = router;

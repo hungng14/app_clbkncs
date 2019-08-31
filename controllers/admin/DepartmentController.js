@@ -186,17 +186,4 @@ module.exports = {
             return res.json(responseError(1003, error));
         }
     },
-    listView: async (req, res) => {
-        try {
-            const select = 'title, name, content';
-            const where = 'status != 4 ORDER BY created_date DESC';
-            const sql = getDataWhere('department', select, where);
-            await executeSql(sql, (data, err) => {
-                if (err) { return res.json(responseError(4000, err)); }
-                return res.json(responseSuccess(2001, data.recordset));
-            });
-        } catch (error) {
-            return res.json(responseError(1003, error));
-        }
-    },
 };

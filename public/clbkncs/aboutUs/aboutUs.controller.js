@@ -11,5 +11,9 @@
             })
         }
         Promise.all([$scope.listDepartment()]).then(() => { });
+
+        $scope.viewInfo = (id) =>{
+            window.location.href = `/department/info?id=${id}`;
+        }
     }
 })();

@@ -1,0 +1,23 @@
+<div class="page-content" id="page-content" ng-controller="DepartmentDetailController" data-ng-init="infoDepartment = {{data}}; getInfo()">
+    <div class="divider mb-5"></div>
+    <main class="container-fluid">
+        <div class="ct-page">
+            <div class="info-clb box">
+                <div class="mb-title text-center">
+                    <h3 class="font-weight-bold text-uppercase" ng-bind="infoDepartment.title">
+                    </h3>
+                    <div class="n-b-title text-uppercase mt-2">
+                        <span class="type-n">
+                            <a href="" ng-bind="infoDepartment.name">
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="hr mt-2"></div>
+                <div class="i-content mt-2" compilehtml content="infoDepartment.content">
+                </div>
+            </div>
+            <div class="divider mb-5"></div>
+    </main>
+    <div class="divider mb-5"></div>
+</div>

@@ -16,7 +16,5 @@
             //     angular.element('.avatar-profile').find('img').attr('src', (urlAvatar || '/images/avatar.jpg'))
             // }
         }
-
-        Promise.all([]).then(() => { });
     }
 })();
